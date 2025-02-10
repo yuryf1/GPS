@@ -1,7 +1,4 @@
-
-// DSPIC33FJ128GP310 Configuration Bit Settings
-
-// 'C' source line config statements
+#include <xc.h> 
 
 // FBS
 #pragma config BWRP = WRPROTECT_OFF     // Boot Segment Write Protect (Boot Segment may be written)
@@ -18,13 +15,13 @@
 #pragma config GSS = OFF                // General Segment Code Protection (User program memory is not code-protected)
 
 // FOSCSEL
-#pragma config FNOSC = FRC              // Oscillator Mode (Internal Fast RC (FRC))
-#pragma config IESO = OFF               // Two-speed Oscillator Start-Up Enable (Start up with user-selected oscillator)
+#pragma config FNOSC = PRIPLL           // Oscillator Mode (Primary Oscillator (XT, HS, EC))
+#pragma config IESO = ON                // Two-speed Oscillator Start-Up Enable (Start up with FRC, then switch)
 
 // FOSC
-#pragma config POSCMD = NONE            // Primary Oscillator Source (Primary Oscillator Disabled)
+#pragma config POSCMD = XT              // Primary Oscillator Source (HS Oscillator Mode)
 #pragma config OSCIOFNC = OFF           // OSC2 Pin Function (OSC2 pin has clock out function)
-#pragma config FCKSM = CSDCMD           // Clock Switching and Monitor (Both Clock Switching and Fail-Safe Clock Monitor are disabled)
+#pragma config FCKSM = CSECMD           // Clock Switching and Monitor (Clock switching is enabled, Fail-Safe Clock Monitor is disabled)
 
 // FWDT
 #pragma config WDTPOST = PS32768        // Watchdog Timer Postscaler (1:32,768)
@@ -38,10 +35,4 @@
 // FICD
 #pragma config ICS = PGD1               // Comm Channel Select (Communicate on PGC1/EMUC1 and PGD1/EMUD1)
 #pragma config JTAGEN = OFF             // JTAG Port Enable (JTAG is Disabled)
-
-// #pragma config statements should precede project file includes.
-// Use project enums instead of #define for ON and OFF.
-
-#include <xc.h>
-
 

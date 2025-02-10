@@ -1,5 +1,16 @@
+#define FINPUT 10000000ULL      // 10 MHz oscillator
+#define FOSC 80000000ULL        // x8 and x6 PLL devides work good
+#define FCY FOSC/2              // device instruction clock for delay_ms() and more
+
 #include <xc.h>                 // mcu registers
 
+#include <libpic30.h>           // delay32() and others
+#include <stdbool.h>            // true/false
+#include <string.h>
+#include "system.h"
+#include "pins.h"
+#include "registers.h"
+#include <stdlib.h>             // calloc   
 
 void __attribute__((interrupt)) _INT0Interrupt( void )               
 {
