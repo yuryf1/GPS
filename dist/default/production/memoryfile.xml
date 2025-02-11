@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/default/production/Tests.X.production.elf">
+  <executable name="dist/default/production/GPS.production.elf">
     <memory name="data">
       <units>bytes</units>
       <length>16384</length>
-      <used>0</used>
-      <free>16384</free>
+      <used>30</used>
+      <free>16354</free>
     </memory>
     <memory name="program">
       <units>bytes</units>
       <length>131328</length>
-      <used>342</used>
-      <free>130986</free>
+      <used>4317</used>
+      <free>127011</free>
     </memory>
   </executable>
 </project>

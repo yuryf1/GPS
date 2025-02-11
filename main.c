@@ -1,50 +1,35 @@
 #define FINPUT 10000000ULL      // 10 MHz oscillator
-#define FOSC 80000000ULL        // x8 and x6 PLL devides work good
-#define FCY FOSC/2              // device instruction clock for delay_ms() and more
+#define FOSC   80000000ULL      // x8 and x6 PLL devides work good
+#define FCY    FOSC/2           // device instruction clock for delay_ms()
 
-#include <xc.h>                 // mcu registers
+//#include <xc.h>                 // mcu registers
 
 #include <libpic30.h>           // delay32() and others
 #include <stdbool.h>            // true/false
-#include <string.h>
+//#include <stdlib.h>             // calloc 
+//#include <string.h>
 #include "system.h"
 #include "pins.h"
 #include "registers.h"
-#include <stdlib.h>             // calloc   
-
-void __attribute__((interrupt)) _INT0Interrupt( void )               
-{
-    PORTEbits.RE5              = 1;
-    Nop();
-    
-    IFS0bits.INT0IF            = 0;
-}
+  
 
 
 int main(void) {
       
-    //Disable watchdog
-    RCONbits.SWDTEN            = 0;
+    EnablePLL(FINPUT,FOSC);
     
-    //Set CPU prioritets to 0        
-    SRbits.IPL                 = 0;
-    //Enable prioritets for interrupts
-    INTCON1bits.NSTDIS         = 0;
-    //Turn on INT0 Interrupt
-    IEC0bits.INT0IE            = 1;
-    //Set highest prioritet for INT0        
-    IPC0bits.INT0IP = 7;
-    //Clear the flag (I dont kwoun why)))
-    IFS0bits.INT0IF            = 0;
-
-      
-    TRISEbits.TRISE5           = 0; 
-    TRISFbits.TRISF6           = 1;  
-    PORTEbits.RE5              = 0;
-    PORTFbits.RF6              = 0;
+    PIN_INIT_OUTPUT(3);  
        
     
-    while(1)
+    BITS_INTERRUPT_CPU_PRIORITY      = 0; //lowest
+    BIT_INTERRUPT_NESTING_DISABLE    = 0;
+    BIT_INTERRUPT_PIN55_ENABLE       = 1;
+    BITS_INTERRUPT_PIN55_PRIORITY    = 7; //highest
+    BIT_INTERRUPT_PIN55_STATUS       = 0;
+
+       
+    
+    while(true)
     {
         Nop();
     }
@@ -53,3 +38,17 @@ int main(void) {
     return 0;
 }
 
+
+void __attribute__((interrupt)) _INT0Interrupt( void )               
+{
+    PIN_TURN_HIGH(3);
+    __delay_ms(4000);
+    PIN_TURN_LOW(3); 
+    
+    BIT_INTERRUPT_PIN55_STATUS       = 0;
+}
+
+void __attribute__((interrupt)) _NULLInterrupt( void )               
+{
+    //TO DO
+}

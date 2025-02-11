@@ -4,9 +4,10 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 
+//Note size of bits!
 
 /*******************************************************************************
-************************* System Registers and Bits ****************************
+******************************** System  Bits **********************************
 *******************************************************************************/
 #define BITS_SYSTEM_PLLPRE           CLKDIVbits.PLLPRE   //<4:0>  // write       
 #define BITS_SYSTEM_PLLDIV           PLLFBDbits.PLLDIV   //<8:0>  // write       
@@ -19,8 +20,8 @@
 /*******************************************************************************
 ********************* Special Function Registers and Bits **********************
 *******************************************************************************/
-#define REGISTER_SPECIAL_UART1_RX            U1RXREG              // read                  
-#define REGISTER_SPECIAL_UART2_RX            U2RXREG              // read
+#define BITS_SPECIAL_UART1_RX                U1RXREG              // read                  
+#define BITS_SPECIAL_UART2_RX                U2RXREG              // read
 #define BIT_SPECIAL_UART1_RX_AVAILABLE       U1STAbits.URXDA      // read
 #define BIT_SPECIAL_UART2_RX_AVAILABLE       U2STAbits.URXDA      // read
 #define BIT_SPECIAL_UART1_FRAMING_ERROR      U1STAbits.FERR       // read
@@ -60,6 +61,17 @@
 //Software RX UART2
 #define BIT_PIN_80_IO                        TRISDbits.TRISD13     //write
 #define BIT_PIN_80_SWITCH                    PORTDbits.RD13        //read
+
+
+
+/*******************************************************************************
+******************************* Interrups **************************************
+*******************************************************************************/
+#define BITS_INTERRUPT_CPU_PRIORITY          SRbits.IPL            //write
+#define BIT_INTERRUPT_NESTING_DISABLE        INTCON1bits.NSTDIS    //write 
+#define BIT_INTERRUPT_PIN55_ENABLE           IEC0bits.INT0IE       //write 
+#define BITS_INTERRUPT_PIN55_PRIORITY        IPC0bits.INT0IP       //write
+#define BIT_INTERRUPT_PIN55_STATUS           IFS0bits.INT0IF       //write
 
 
 
