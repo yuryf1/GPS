@@ -1,4 +1,4 @@
-#include "system_methods.h"
+#include "system_methods_pll.h"
 
 #include "registers.h"
 #include <stdbool.h>            // true/false
@@ -34,3 +34,8 @@ bool __IsPllReady()
 {
     return (BIT_SYSTEM_PLL_READY == 1)? true : false;
 }
+
+
+
+
+

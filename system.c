@@ -1,6 +1,6 @@
 #include "system.h"
 
-#include "system_methods.h"
+#include "system_methods_pll.h"
 
 
 double CalculateError(double multiply, 
@@ -68,21 +68,36 @@ void EnablePLL(unsigned long long freqIn, unsigned long long freqOut)
 }
 
 
-//void EnablePLL()
-//{ 
-//    //10MHz to 80MHz scaling
+
+void EnablePerepherial()
+{    
+    //For manage M1 (main power supply) transistor 
+    PIN_INIT_OUTPUT(87);  
+    PIN_TURN_LOW(87);       
+    
+     //For manage M12 (GSM module power supply) transistor
+    PIN_INIT_OUTPUT(1);
+    PIN_TURN_LOW(1); 
+    
+    //For turn on GSM module
+    PIN_INIT_OUTPUT(14);   
+    PIN_TURN_HIGH(14);     
+    __delay_ms(1000);
+    PIN_TURN_LOW(14);
+    
+    //For manage M13 (GPS module power supply) transistor
+    PIN_INIT_OUTPUT(53);
+    PIN_TURN_LOW(53); 
+      
+//    Nop();
+//    //M2 transistor
+//    _TRISF1 = 0;
+//    _RF1 = 0; 
 //    
-//    // N1 = 2  => 10 MHz / 2 = 5 MHz
-//    __SetPLLPRE(0);
-//    
-//    // M  = 32 => 5 MHz * 32 = 160 MHz
-//    __SetPLLDIV(0x1E);
-//    
-//    // N2 = 2  => 160 MHz / 2 = 80 MHz (40 MIPS)
-//    __SetPLLPOST(0);
-//   
-//    //Migrate to other method
-//    __DisableWatchdog();
-//    
-//    while(__IsPllReady() == false) {};      
-//}
+//    Nop();
+//    //M3 transistor
+//    //Configure RG0(pin90) to digital output
+//    _TRISG0 = 0;
+//    //pin90 close M3 transistor
+//    _RG0 = 0;     
+}

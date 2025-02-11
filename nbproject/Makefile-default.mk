@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c config.c system.c system_methods.c pins.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c config.c system.c pins.c system_methods_pll.c system_methods_perephereal.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/system.o ${OBJECTDIR}/system_methods.o ${OBJECTDIR}/pins.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/system_methods.o.d ${OBJECTDIR}/pins.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/system.o ${OBJECTDIR}/pins.o ${OBJECTDIR}/system_methods_pll.o ${OBJECTDIR}/system_methods_perephereal.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/pins.o.d ${OBJECTDIR}/system_methods_pll.o.d ${OBJECTDIR}/system_methods_perephereal.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/system.o ${OBJECTDIR}/system_methods.o ${OBJECTDIR}/pins.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/system.o ${OBJECTDIR}/pins.o ${OBJECTDIR}/system_methods_pll.o ${OBJECTDIR}/system_methods_perephereal.o
 
 # Source Files
-SOURCEFILES=main.c config.c system.c system_methods.c pins.c
+SOURCEFILES=main.c config.c system.c pins.c system_methods_pll.c system_methods_perephereal.c
 
 
 
@@ -107,17 +107,23 @@ ${OBJECTDIR}/system.o: system.c  .generated_files/flags/default/5ca0b25c16a7e23f
 	@${RM} ${OBJECTDIR}/system.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  system.c  -o ${OBJECTDIR}/system.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/system.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/system_methods.o: system_methods.c  .generated_files/flags/default/68018530cda5cc33421fef7c3e6c23cd5a66b77e .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/system_methods.o.d 
-	@${RM} ${OBJECTDIR}/system_methods.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  system_methods.c  -o ${OBJECTDIR}/system_methods.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/system_methods.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/pins.o: pins.c  .generated_files/flags/default/7680d135f1c27dc08b7b154d9c4cd171a0ec99b4 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/pins.o.d 
 	@${RM} ${OBJECTDIR}/pins.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  pins.c  -o ${OBJECTDIR}/pins.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pins.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/system_methods_pll.o: system_methods_pll.c  .generated_files/flags/default/39b87ff80871056904b7897bd882a5092d26ac2f .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/system_methods_pll.o.d 
+	@${RM} ${OBJECTDIR}/system_methods_pll.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_methods_pll.c  -o ${OBJECTDIR}/system_methods_pll.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/system_methods_pll.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/system_methods_perephereal.o: system_methods_perephereal.c  .generated_files/flags/default/3fb0358efa0a0f97ad8539801130b66e79460676 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/system_methods_perephereal.o.d 
+	@${RM} ${OBJECTDIR}/system_methods_perephereal.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_methods_perephereal.c  -o ${OBJECTDIR}/system_methods_perephereal.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/system_methods_perephereal.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/91191181e611efe4f4ef2581dcb98f78e5613dc9 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
@@ -138,17 +144,23 @@ ${OBJECTDIR}/system.o: system.c  .generated_files/flags/default/2f55f0250865714a
 	@${RM} ${OBJECTDIR}/system.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  system.c  -o ${OBJECTDIR}/system.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/system.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/system_methods.o: system_methods.c  .generated_files/flags/default/a52346ebd8caa89c7e7345fddc1df1f1bab5c3a9 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/system_methods.o.d 
-	@${RM} ${OBJECTDIR}/system_methods.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  system_methods.c  -o ${OBJECTDIR}/system_methods.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/system_methods.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/pins.o: pins.c  .generated_files/flags/default/942a135521290cb34b17a84b18e619a4cba4ab83 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/pins.o.d 
 	@${RM} ${OBJECTDIR}/pins.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  pins.c  -o ${OBJECTDIR}/pins.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pins.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/system_methods_pll.o: system_methods_pll.c  .generated_files/flags/default/3747d82e97d68c6c0a1aab8fc0167d622807e9e4 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/system_methods_pll.o.d 
+	@${RM} ${OBJECTDIR}/system_methods_pll.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_methods_pll.c  -o ${OBJECTDIR}/system_methods_pll.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/system_methods_pll.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/system_methods_perephereal.o: system_methods_perephereal.c  .generated_files/flags/default/dc57bfeaf0bd7ec1348c3f871fadb0596485fd83 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/system_methods_perephereal.o.d 
+	@${RM} ${OBJECTDIR}/system_methods_perephereal.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  system_methods_perephereal.c  -o ${OBJECTDIR}/system_methods_perephereal.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/system_methods_perephereal.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 
