@@ -1,0 +1,6 @@
+set(CMAKE_C_COMPILER_WORKS 1)
+set(MP_CC_DIR "c:/Program Files/Microchip/xc-dsc/v3.20")
+set(CMAKE_C_COMPILER "c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe")
+set(MP_AS "c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-as.exe")
+set(MP_LD "c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-ld.exe")
+set(MP_BIN2HEX "c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-bin2hex.exe")

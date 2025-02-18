@@ -1,0 +1,6 @@
+{
+    "mplab.clangd.arguments": [
+        "--compile-commands-dir=e:\\Irrigation\\GPS\\_build\\GPS\\default"
+    ],
+    "mplab.clangd.path": "c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-clangd.exe"
+}

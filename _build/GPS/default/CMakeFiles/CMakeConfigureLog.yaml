@@ -1,0 +1,247 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake:206 (message)"
+      - "CMakeLists.txt:18 (project)"
+    message: |
+      The target system is: Generic -  - 
+      The host system is: Windows - 10.0.26100 - 
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:18 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Assembler messages:
+      Warning: Using default target divide cycle count of 17; please specify device.
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/3.27.1/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:1107 (message)"
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineASMCompiler.cmake:127 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:18 (project)"
+    message: |
+      Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
+      elf-gcc.exe (Microchip Technology) 8.3.1 (XC-DSC, Microchip v3.20)  (A) Build date: Dec 13 2024  
+      Part support version: 3.20 (A)
+      __XC_DSC_VERSION__ == 3020
+      Copyright (C) 2018 Free Software Foundation, Inc.
+      This is free software; see the source for copying conditions.  There is NO
+      warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:18 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/CMakeScratch/TryCompile-5qsb56"
+      binary: "E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/CMakeScratch/TryCompile-5qsb56"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_USER_MAKE_RULES_OVERRIDE: "E:/Irrigation/GPS/cmake/GPS/default/.generated/overrides.cmake"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/CMakeScratch/TryCompile-5qsb56'
+        
+        Run Build Command(s): C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/bin/cmake.exe -E env VERBOSE=1 C:/Users/fedyu/.mplab/app-finder/apps/make/v4.4.1/windows/make.exe -f Makefile cmTC_6bc57/fast
+        C:/Users/fedyu/.mplab/app-finder/apps/make/v4.4.1/windows/make.exe  -f CMakeFiles/cmTC_6bc57.dir/build.make CMakeFiles/cmTC_6bc57.dir/build
+        make[1]: Entering directory 'E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/CMakeScratch/TryCompile-5qsb56'
+        Building C object CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o
+        "c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe"   -v -o CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o -c C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=c:\\Program Files\\Microchip\\xc-dsc\\v3.20\\bin\\bin/elf-gcc.exe
+        Target: pic30-elf
+        Configured with: /home/xc16/release-builds/build_20241213/src/xc16_gcc_831/gcc/configure --host=x86_64-w64-mingw32 --build=x86_64-linux --enable-stage1-languages=c --target=pic30-elf --disable-decimal-float --disable-multilib --disable-bootstrap --disable-hosted-libstdcxx --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --enable-libssp --disable-libstdcxx-pch --disable-libstdcxx-verbose --disable-lto --disable-maintainer-mode --disable-nls --disable-shared --disable-sim --disable-threads --disable-tls --disable-gdb --enable-interwork --enable-plugins --enable-languages=c --enable-target-optspace --with-gnu-as --with-gnu-ld --without-isl --without-cloog --without-headers --with-pkgversion='Microchip Technology' --prefix=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs --with-sysroot=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs --libexecdir=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/ --program-prefix=elf- --libdir=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/ --with-dwarf2 --with-bugurl=https://www.microchip.com/technical-support --with-host-libstdcxx=' '
+        Thread model: single
+        gcc version 8.3.1 (XC-DSC, Microchip v3.20) Build date: Dec 13 2024   (Microchip Technology) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o' '-c'
+         c:/program files/microchip/xc-dsc/v3.20/bin/bin/../xc-dsc-cc1.exe -quiet -v -iprefix c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../pic30-elf/8.3.1/ C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeCCompilerABI.c -mresource=c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../c30_device.info -omf=elf -quiet -dumpbase CMakeCCompilerABI.c -auxbase-strip CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o -version -o C:\\Users\\fedyu\\AppData\\Local\\Temp\\ccoUDHCu.s
+        GNU C99 (Microchip Technology) version 8.3.1 (XC-DSC, Microchip v3.20) Build date: Dec 13 2024   (pic30-elf)
+        	compiled by GNU C version 9.3-win32 20200320, GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../pic30-elf/8.3.1/include"
+        ignoring nonexistent directory "c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../pic30-elf/8.3.1/include-fixed"
+        ignoring nonexistent directory "/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/gcc/pic30-elf/8.3.1/include"
+        ignoring nonexistent directory "/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/gcc/pic30-elf/8.3.1/../../../../include"
+        ignoring nonexistent directory "/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/gcc/pic30-elf/8.3.1/include-fixed"
+        ignoring nonexistent directory "/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../..\\include
+         c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../..\\support\\generic\\h
+        End of search list.
+        GNU C99 (Microchip Technology) version 8.3.1 (XC-DSC, Microchip v3.20) Build date: Dec 13 2024   (pic30-elf)
+        	compiled by GNU C version 9.3-win32 20200320, GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: ca7a2b8264323be65d69d0aec9e6d6bb
+        Microchip Language Tool Shell Version 3.20 (Build date: Dec 13 2024).
+        Copyright (c) 2012-2017 Microchip Technology Inc. All rights reserved
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o' '-c'
+         c:/program files/microchip/xc-dsc/v3.20/bin/bin/../xc-dsc-as.exe -v --relax -omf=elf -o CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o C:\\Users\\fedyu\\AppData\\Local\\Temp\\ccoUDHCu.s
+        GNU assembler version 2.32(3.20 (A)) using BFD version pic30-elf32 (GNU Binutils) 2.32
+        Assembler messages:
+        Warning: Using default target divide cycle count of 17; please specify device.
+        Microchip Language Tool Shell Version 3.20 (Build date: Dec 13 2024).
+        Copyright (c) 2012-2017 Microchip Technology Inc. All rights reserved
+        PIC30_COMPILER_PATH=c:/program files/microchip/xc-dsc/v3.20/bin/bin/../
+        PIC30_LIBRARY_PATH=c:/program files/microchip/xc-dsc/v3.20/bin/bin/../;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../lib/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC30F/gld/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33C/gld/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33E/gld/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33A/gld/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33F/gld/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o' '-c'
+        Microchip Language Tool Shell Version 3.20 (Build date: Dec 13 2024).
+        Copyright (c) 2012-2017 Microchip Technology Inc. All rights reserved
+        Linking C executable cmTC_6bc57
+        "c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe"  -v "CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o"  -o cmTC_6bc57 
+        Using built-in specs.
+        COLLECT_GCC=c:\\Program Files\\Microchip\\xc-dsc\\v3.20\\bin\\bin/elf-gcc.exe
+        Target: pic30-elf
+        Configured with: /home/xc16/release-builds/build_20241213/src/xc16_gcc_831/gcc/configure --host=x86_64-w64-mingw32 --build=x86_64-linux --enable-stage1-languages=c --target=pic30-elf --disable-decimal-float --disable-multilib --disable-bootstrap --disable-hosted-libstdcxx --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --enable-libssp --disable-libstdcxx-pch --disable-libstdcxx-verbose --disable-lto --disable-maintainer-mode --disable-nls --disable-shared --disable-sim --disable-threads --disable-tls --disable-gdb --enable-interwork --enable-plugins --enable-languages=c --enable-target-optspace --with-gnu-as --with-gnu-ld --without-isl --without-cloog --without-headers --with-pkgversion='Microchip Technology' --prefix=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs --with-sysroot=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs --libexecdir=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/ --program-prefix=elf- --libdir=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/ --with-dwarf2 --with-bugurl=https://www.microchip.com/technical-support --with-host-libstdcxx=' '
+        Thread model: single
+        gcc version 8.3.1 (XC-DSC, Microchip v3.20) Build date: Dec 13 2024   (Microchip Technology) 
+        PIC30_COMPILER_PATH=c:/program files/microchip/xc-dsc/v3.20/bin/bin/../
+        PIC30_LIBRARY_PATH=c:/program files/microchip/xc-dsc/v3.20/bin/bin/../;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../lib/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC30F/gld/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33C/gld/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33E/gld/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33A/gld/;c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33F/gld/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6bc57'
+         c:/program files/microchip/xc-dsc/v3.20/bin/bin/../xc-dsc-ld.exe -omf=elf -o cmTC_6bc57 -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/.. -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../lib -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC30F/gld -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33C/gld -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33E/gld -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33A/gld -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33F/gld CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o -start-group -lc99-pic30-elf -lm-elf -lc99-elf -end-group
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6bc57'
+        Microchip Language Tool Shell Version 3.20 (Build date: Dec 13 2024).
+        Copyright (c) 2012-2017 Microchip Technology Inc. All rights reserved
+        make[1]: Leaving directory 'E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/CMakeScratch/TryCompile-5qsb56'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:18 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../include]
+          add: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/generic/h]
+        end of search list found
+        collapse include dir [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../include] ==> [C:/Program Files/Microchip/xc-dsc/v3.20/include]
+        collapse include dir [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/generic/h] ==> [C:/Program Files/Microchip/xc-dsc/v3.20/support/generic/h]
+        implicit include dirs: [C:/Program Files/Microchip/xc-dsc/v3.20/include;C:/Program Files/Microchip/xc-dsc/v3.20/support/generic/h]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
+      - "C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:18 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(xc-dsc-ld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: 'E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/CMakeScratch/TryCompile-5qsb56']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/bin/cmake.exe -E env VERBOSE=1 C:/Users/fedyu/.mplab/app-finder/apps/make/v4.4.1/windows/make.exe -f Makefile cmTC_6bc57/fast]
+        ignore line: [C:/Users/fedyu/.mplab/app-finder/apps/make/v4.4.1/windows/make.exe  -f CMakeFiles/cmTC_6bc57.dir/build.make CMakeFiles/cmTC_6bc57.dir/build]
+        ignore line: [make[1]: Entering directory 'E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/CMakeScratch/TryCompile-5qsb56']
+        ignore line: [Building C object CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o]
+        ignore line: ["c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe"   -v -o CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o -c C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=c:\\Program Files\\Microchip\\xc-dsc\\v3.20\\bin\\bin/elf-gcc.exe]
+        ignore line: [Target: pic30-elf]
+        ignore line: [Configured with: /home/xc16/release-builds/build_20241213/src/xc16_gcc_831/gcc/configure --host=x86_64-w64-mingw32 --build=x86_64-linux --enable-stage1-languages=c --target=pic30-elf --disable-decimal-float --disable-multilib --disable-bootstrap --disable-hosted-libstdcxx --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --enable-libssp --disable-libstdcxx-pch --disable-libstdcxx-verbose --disable-lto --disable-maintainer-mode --disable-nls --disable-shared --disable-sim --disable-threads --disable-tls --disable-gdb --enable-interwork --enable-plugins --enable-languages=c --enable-target-optspace --with-gnu-as --with-gnu-ld --without-isl --without-cloog --without-headers --with-pkgversion='Microchip Technology' --prefix=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs --with-sysroot=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs --libexecdir=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/ --program-prefix=elf- --libdir=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/ --with-dwarf2 --with-bugurl=https://www.microchip.com/technical-support --with-host-libstdcxx=' ']
+        ignore line: [Thread model: single]
+        ignore line: [gcc version 8.3.1 (XC-DSC  Microchip v3.20) Build date: Dec 13 2024   (Microchip Technology) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o' '-c']
+        ignore line: [ c:/program files/microchip/xc-dsc/v3.20/bin/bin/../xc-dsc-cc1.exe -quiet -v -iprefix c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../pic30-elf/8.3.1/ C:/Users/fedyu/.mplab/app-finder/apps/cmake/v3.27.1/cmake-3.27.1-windows-x86_64/share/cmake-3.27/Modules/CMakeCCompilerABI.c -mresource=c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../c30_device.info -omf=elf -quiet -dumpbase CMakeCCompilerABI.c -auxbase-strip CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o -version -o C:\\Users\\fedyu\\AppData\\Local\\Temp\\ccoUDHCu.s]
+        ignore line: [GNU C99 (Microchip Technology) version 8.3.1 (XC-DSC  Microchip v3.20) Build date: Dec 13 2024   (pic30-elf)]
+        ignore line: [	compiled by GNU C version 9.3-win32 20200320  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../pic30-elf/8.3.1/include"]
+        ignore line: [ignoring nonexistent directory "c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../pic30-elf/8.3.1/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/gcc/pic30-elf/8.3.1/include"]
+        ignore line: [ignoring nonexistent directory "/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/gcc/pic30-elf/8.3.1/../../../../include"]
+        ignore line: [ignoring nonexistent directory "/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/gcc/pic30-elf/8.3.1/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../..\\include]
+        ignore line: [ c:\\program files\\microchip\\xc-dsc\\v3.20\\bin\\bin\\../..\\support\\generic\\h]
+        ignore line: [End of search list.]
+        ignore line: [GNU C99 (Microchip Technology) version 8.3.1 (XC-DSC  Microchip v3.20) Build date: Dec 13 2024   (pic30-elf)]
+        ignore line: [	compiled by GNU C version 9.3-win32 20200320  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: ca7a2b8264323be65d69d0aec9e6d6bb]
+        ignore line: [Microchip Language Tool Shell Version 3.20 (Build date: Dec 13 2024).]
+        ignore line: [Copyright (c) 2012-2017 Microchip Technology Inc. All rights reserved]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o' '-c']
+        ignore line: [ c:/program files/microchip/xc-dsc/v3.20/bin/bin/../xc-dsc-as.exe -v --relax -omf=elf -o CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o C:\\Users\\fedyu\\AppData\\Local\\Temp\\ccoUDHCu.s]
+        ignore line: [GNU assembler version 2.32(3.20 (A)) using BFD version pic30-elf32 (GNU Binutils) 2.32]
+        ignore line: [Assembler messages:]
+        ignore line: [Warning: Using default target divide cycle count of 17]
+        ignore line: [ please specify device.]
+        ignore line: [Microchip Language Tool Shell Version 3.20 (Build date: Dec 13 2024).]
+        ignore line: [Copyright (c) 2012-2017 Microchip Technology Inc. All rights reserved]
+        ignore line: [PIC30_COMPILER_PATH=c:/program files/microchip/xc-dsc/v3.20/bin/bin/../]
+        ignore line: [PIC30_LIBRARY_PATH=c:/program files/microchip/xc-dsc/v3.20/bin/bin/../]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../lib/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC30F/gld/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33C/gld/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33E/gld/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33A/gld/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33F/gld/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o' '-c']
+        ignore line: [Microchip Language Tool Shell Version 3.20 (Build date: Dec 13 2024).]
+        ignore line: [Copyright (c) 2012-2017 Microchip Technology Inc. All rights reserved]
+        ignore line: [Linking C executable cmTC_6bc57]
+        ignore line: ["c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe"  -v "CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o"  -o cmTC_6bc57 ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=c:\\Program Files\\Microchip\\xc-dsc\\v3.20\\bin\\bin/elf-gcc.exe]
+        ignore line: [Target: pic30-elf]
+        ignore line: [Configured with: /home/xc16/release-builds/build_20241213/src/xc16_gcc_831/gcc/configure --host=x86_64-w64-mingw32 --build=x86_64-linux --enable-stage1-languages=c --target=pic30-elf --disable-decimal-float --disable-multilib --disable-bootstrap --disable-hosted-libstdcxx --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --enable-libssp --disable-libstdcxx-pch --disable-libstdcxx-verbose --disable-lto --disable-maintainer-mode --disable-nls --disable-shared --disable-sim --disable-threads --disable-tls --disable-gdb --enable-interwork --enable-plugins --enable-languages=c --enable-target-optspace --with-gnu-as --with-gnu-ld --without-isl --without-cloog --without-headers --with-pkgversion='Microchip Technology' --prefix=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs --with-sysroot=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs --libexecdir=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/ --program-prefix=elf- --libdir=/home/xc16/release-builds/build_20241213/bin/xc16_gcc_831-mingw64-xc16-xclm/host-libs/lib/ --with-dwarf2 --with-bugurl=https://www.microchip.com/technical-support --with-host-libstdcxx=' ']
+        ignore line: [Thread model: single]
+        ignore line: [gcc version 8.3.1 (XC-DSC  Microchip v3.20) Build date: Dec 13 2024   (Microchip Technology) ]
+        ignore line: [PIC30_COMPILER_PATH=c:/program files/microchip/xc-dsc/v3.20/bin/bin/../]
+        ignore line: [PIC30_LIBRARY_PATH=c:/program files/microchip/xc-dsc/v3.20/bin/bin/../]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../lib/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC30F/gld/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33C/gld/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33E/gld/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33A/gld/]
+        ignore line: [c:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33F/gld/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6bc57']
+        ignore line: [ c:/program files/microchip/xc-dsc/v3.20/bin/bin/../xc-dsc-ld.exe -omf=elf -o cmTC_6bc57 -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/.. -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../lib -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC30F/gld -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33C/gld -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33E/gld -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33A/gld -Lc:/program files/microchip/xc-dsc/v3.20/bin/bin/../../support/dsPIC33F/gld CMakeFiles/cmTC_6bc57.dir/CMakeCCompilerABI.c.o -start-group -lc99-pic30-elf -lm-elf -lc99-elf -end-group]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6bc57']
+        ignore line: [Microchip Language Tool Shell Version 3.20 (Build date: Dec 13 2024).]
+        ignore line: [Copyright (c) 2012-2017 Microchip Technology Inc. All rights reserved]
+        ignore line: [make[1]: Leaving directory 'E:/Irrigation/GPS/_build/GPS/default/CMakeFiles/CMakeScratch/TryCompile-5qsb56']
+        ignore line: []
+        ignore line: []
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+...

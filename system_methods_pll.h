@@ -1,6 +1,6 @@
   
-#ifndef XC_HEADER_TEMPLATE_H_SYSTEM_METHODS
-#define	XC_HEADER_TEMPLATE_H_SYSTEM_METHODS
+#ifndef XC_HEADER_TEMPLATE_H_SYSTEM_METHODS_PLL
+#define	XC_HEADER_TEMPLATE_H_SYSTEM_METHODS_PLL
   
 #include <stdbool.h>                       // true/false
 

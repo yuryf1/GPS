@@ -1,0 +1,38 @@
+[
+{
+  "directory": "E:/Irrigation/GPS/_build/GPS/default",
+  "command": "\"c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe\"   -mcpu=33FJ128GP310 -g -DXPRJ_default=default -O0 -msmart-io=1 -Wall -msfr-warn=off -mdfp=C:/Users/fedyu/.mchp_packs/Microchip/dsPIC33F-GP-MC_DFP/1.4.235/xc16 -o CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/main.c.o -c E:/Irrigation/GPS/main.c",
+  "file": "E:/Irrigation/GPS/main.c",
+  "output": "CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/main.c.o"
+},
+{
+  "directory": "E:/Irrigation/GPS/_build/GPS/default",
+  "command": "\"c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe\"   -mcpu=33FJ128GP310 -g -DXPRJ_default=default -O0 -msmart-io=1 -Wall -msfr-warn=off -mdfp=C:/Users/fedyu/.mchp_packs/Microchip/dsPIC33F-GP-MC_DFP/1.4.235/xc16 -o CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/config.c.o -c E:/Irrigation/GPS/config.c",
+  "file": "E:/Irrigation/GPS/config.c",
+  "output": "CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/config.c.o"
+},
+{
+  "directory": "E:/Irrigation/GPS/_build/GPS/default",
+  "command": "\"c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe\"   -mcpu=33FJ128GP310 -g -DXPRJ_default=default -O0 -msmart-io=1 -Wall -msfr-warn=off -mdfp=C:/Users/fedyu/.mchp_packs/Microchip/dsPIC33F-GP-MC_DFP/1.4.235/xc16 -o CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/system.c.o -c E:/Irrigation/GPS/system.c",
+  "file": "E:/Irrigation/GPS/system.c",
+  "output": "CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/system.c.o"
+},
+{
+  "directory": "E:/Irrigation/GPS/_build/GPS/default",
+  "command": "\"c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe\"   -mcpu=33FJ128GP310 -g -DXPRJ_default=default -O0 -msmart-io=1 -Wall -msfr-warn=off -mdfp=C:/Users/fedyu/.mchp_packs/Microchip/dsPIC33F-GP-MC_DFP/1.4.235/xc16 -o CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/pins.c.o -c E:/Irrigation/GPS/pins.c",
+  "file": "E:/Irrigation/GPS/pins.c",
+  "output": "CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/pins.c.o"
+},
+{
+  "directory": "E:/Irrigation/GPS/_build/GPS/default",
+  "command": "\"c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe\"   -mcpu=33FJ128GP310 -g -DXPRJ_default=default -O0 -msmart-io=1 -Wall -msfr-warn=off -mdfp=C:/Users/fedyu/.mchp_packs/Microchip/dsPIC33F-GP-MC_DFP/1.4.235/xc16 -o CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/system_methods_pll.c.o -c E:/Irrigation/GPS/system_methods_pll.c",
+  "file": "E:/Irrigation/GPS/system_methods_pll.c",
+  "output": "CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/system_methods_pll.c.o"
+},
+{
+  "directory": "E:/Irrigation/GPS/_build/GPS/default",
+  "command": "\"c:/Program Files/Microchip/xc-dsc/v3.20/bin/xc-dsc-gcc.exe\"   -mcpu=33FJ128GP310 -g -DXPRJ_default=default -O0 -msmart-io=1 -Wall -msfr-warn=off -mdfp=C:/Users/fedyu/.mchp_packs/Microchip/dsPIC33F-GP-MC_DFP/1.4.235/xc16 -o CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/system_methods_perephereal.c.o -c E:/Irrigation/GPS/system_methods_perephereal.c",
+  "file": "E:/Irrigation/GPS/system_methods_perephereal.c",
+  "output": "CMakeFiles/GPS_default_compile.dir/E_/Irrigation/GPS/system_methods_perephereal.c.o"
+}
+]
