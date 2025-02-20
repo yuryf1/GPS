@@ -2,6 +2,8 @@
 #define	XC_HEADER_TEMPLATE_H_SYSTEM_METHODS_PEREPHEREAL
  
 
+
+
 void __EnablePower();
 
 void __EnableModuleGSM();

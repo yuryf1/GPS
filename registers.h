@@ -6,31 +6,6 @@
 
 //Note size of bits!
 
-/*******************************************************************************
-******************************** System  Bits **********************************
-*******************************************************************************/
-#define BITS_SYSTEM_PLLPRE           CLKDIVbits.PLLPRE   //<4:0>  // write       
-#define BITS_SYSTEM_PLLDIV           PLLFBDbits.PLLDIV   //<8:0>  // write       
-#define BITS_SYSTEM_PLLPOST          CLKDIVbits.PLLPOST  //<1:0>  // write
-#define BIT_SYSTEM_WATCHDOG          RCONbits.SWDTEN              // write
-#define BIT_SYSTEM_PLL_READY         OSCCONbits.LOCK              // read
-
-
-
-/*******************************************************************************
-********************* Special Function Registers and Bits **********************
-*******************************************************************************/
-#define BITS_SPECIAL_UART1_RX                U1RXREG              // read                  
-#define BITS_SPECIAL_UART2_RX                U2RXREG              // read
-#define BIT_SPECIAL_UART1_RX_AVAILABLE       U1STAbits.URXDA      // read
-#define BIT_SPECIAL_UART2_RX_AVAILABLE       U2STAbits.URXDA      // read
-#define BIT_SPECIAL_UART1_FRAMING_ERROR      U1STAbits.FERR       // read
-#define BIT_SPECIAL_UART2_FRAMING_ERROR      U2STAbits.FERR       // read
-#define BIT_SPECIAL_UART1_FULL_BUFFER        U1STAbits.OERR       // read/clear
-#define BIT_SPECIAL_UART2_FULL_BUFFER        U2STAbits.OERR       // read/clear
-#define BIT_SPECIAL_UART1_TX_AVAILABLE       U1STAbits.TRMT       // read
-#define BIT_SPECIAL_UART2_TX_AVAILABLE       U2STAbits.TRMT       // read
-
 
 /*******************************************************************************
 ********************************** Pins ****************************************
@@ -60,6 +35,58 @@
 //Software RX UART2
 #define BIT_PIN_80_IO                        TRISDbits.TRISD13     //write
 #define BIT_PIN_80_SWITCH                    PORTDbits.RD13        //read
+
+
+/*******************************************************************************
+******************************** Naming Pins ***********************************
+*******************************************************************************/
+#define SET_PIN_POWER_SUPPLY_OUTPUT          BIT_PIN_87_IO = 0 
+#define SET_PIN_POWER_SUPPLY_INPUT           BIT_PIN_87_IO = 1 
+#define SET_PIN_POWER_SUPPLY_LOW             BIT_PIN_87_SWITCH = 0
+#define SET_PIN_POWER_SUPPLY_HIGH            BIT_PIN_87_SWITCH = 1
+
+#define SET_PIN_GPS_SUPPLY_OUTPUT            BIT_PIN_53_IO = 0
+#define SET_PIN_GPS_SUPPLY_INPUT             BIT_PIN_53_IO = 1
+#define SET_PIN_GPS_SUPPLY_LOW               BIT_PIN_53_SWITCH = 0
+#define SET_PIN_GPS_SUPPLY_HIGH              BIT_PIN_53_SWITCH = 1
+
+#define SET_PIN_GSM_SUPPLY_OUTPUT            BIT_PIN_1_IO = 0
+#define SET_PIN_GSM_SUPPLY_INPUT             BIT_PIN_1_IO = 1
+#define SET_PIN_GSM_SUPPLY_LOW               BIT_PIN_1_SWITCH = 0
+#define SET_PIN_GSM_SUPPLY_HIGH              BIT_PIN_1_SWITCH = 1
+
+#define SET_PIN_GSM_BUTTON_OUTPUT            BIT_PIN_14_IO = 0
+#define SET_PIN_GSM_BUTTON_INPUT             BIT_PIN_14_IO = 1
+#define SET_PIN_GSM_BUTTON_LOW               BIT_PIN_14_SWITCH = 0
+#define SET_PIN_GSM_BUTTON_HIGH              BIT_PIN_14_SWITCH = 1
+
+
+/*******************************************************************************
+******************************** System  Bits **********************************
+*******************************************************************************/
+#define BITS_SYSTEM_PLLPRE           CLKDIVbits.PLLPRE   //<4:0>  // write       
+#define BITS_SYSTEM_PLLDIV           PLLFBDbits.PLLDIV   //<8:0>  // write       
+#define BITS_SYSTEM_PLLPOST          CLKDIVbits.PLLPOST  //<1:0>  // write
+#define BIT_SYSTEM_WATCHDOG          RCONbits.SWDTEN              // write
+#define BIT_SYSTEM_PLL_READY         OSCCONbits.LOCK              // read
+
+
+
+/*******************************************************************************
+********************* Special Function Registers and Bits **********************
+*******************************************************************************/
+#define BITS_SPECIAL_UART1_RX                U1RXREG              // read                  
+#define BITS_SPECIAL_UART2_RX                U2RXREG              // read
+#define BIT_SPECIAL_UART1_RX_AVAILABLE       U1STAbits.URXDA      // read
+#define BIT_SPECIAL_UART2_RX_AVAILABLE       U2STAbits.URXDA      // read
+#define BIT_SPECIAL_UART1_FRAMING_ERROR      U1STAbits.FERR       // read
+#define BIT_SPECIAL_UART2_FRAMING_ERROR      U2STAbits.FERR       // read
+#define BIT_SPECIAL_UART1_FULL_BUFFER        U1STAbits.OERR       // read/clear
+#define BIT_SPECIAL_UART2_FULL_BUFFER        U2STAbits.OERR       // read/clear
+#define BIT_SPECIAL_UART1_TX_AVAILABLE       U1STAbits.TRMT       // read
+#define BIT_SPECIAL_UART2_TX_AVAILABLE       U2STAbits.TRMT       // read
+
+
 
 
 

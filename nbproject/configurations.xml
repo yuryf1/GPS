@@ -27,7 +27,6 @@
       <itemPath>system.c</itemPath>
       <itemPath>system_methods_pll.c</itemPath>
       <itemPath>system_methods_perephereal.c</itemPath>
-      <itemPath>pins.c</itemPath>
       <itemPath>configuration_bits.c</itemPath>
     </logicalFolder>
   </logicalFolder>
