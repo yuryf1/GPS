@@ -11,7 +11,6 @@ static const unsigned short N2all[3] = {2, 4, 8};
 
 void EnablePLL(unsigned long long freqIn, unsigned long long freqOut);
 
-void EnablePerepherial();
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

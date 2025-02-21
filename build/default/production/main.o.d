@@ -1,10 +1,12 @@
-build/default/production/main.o: main.c configuration.h system.h pins.h \
- registers.h
+build/default/production/main.o: main.c configuration.h system.h \
+ perephereal_methods.h registers.h pins.h
 
 configuration.h:
 
 system.h:
 
-pins.h:
+perephereal_methods.h:
 
 registers.h:
+
+pins.h:

@@ -1,7 +1,6 @@
 #include "system.h"
 
-#include "system_methods_pll.h"
-#include "system_methods_perephereal.h"
+#include "system_methods.h"
 
 
 double CalculateError(double multiply, 
@@ -66,14 +65,4 @@ void EnablePLL(unsigned long long freqIn, unsigned long long freqOut)
     __DisableWatchdog();
     
     while(__IsPllReady() == false) {};      
-}
-
-
-
-void EnablePerepherial()
-{    
-    __EnablePower(); 
-    __EnableModuleGPS();    
-    __EnableModuleGSM();   
-       
 }

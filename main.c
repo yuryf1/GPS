@@ -1,7 +1,9 @@
 #include "configuration.h"
-#include "system.h"
+#include "system.h"               // EnablePLL(FINPUT,FOSC);
+#include "perephereal_methods.h"  // EnablePerephereal();EnableModuleGPS();EnableModuleGSM();
 #include "pins.h"
 #include "registers.h"
+
 
 #include <libpic30.h>           // delay32() and others
 #include <stdbool.h>            // true/false
@@ -13,7 +15,10 @@
 int main(void) {
       
     EnablePLL(FINPUT,FOSC);
-    EnablePerepherial();
+    EnablePerepherealPower();
+    EnableModuleGPS();
+    EnableModuleGSM();
+    
     
     PIN_INIT_OUTPUT(3);  
        
@@ -41,6 +46,7 @@ void __attribute__((interrupt)) _INT0Interrupt( void )
     PIN_TURN_HIGH(3);
     __delay_ms(500);
     PIN_TURN_LOW(3); 
+    
     
     BIT_INTERRUPT_PIN55_STATUS       = 0;
 }
