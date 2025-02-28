@@ -18,11 +18,11 @@ int main(void) {
     EnablePLL(FINPUT,FOSC);
     EnablePerepherealPower();
     //EnableModuleGPS();
-    EnableModuleGSM();
+    //EnableModuleGSM();
         
     PIN_INIT_OUTPUT(3);
-    PIN_TURN_HIGH(3);
-    __delay_ms(2000);
+//    PIN_TURN_HIGH(3);
+//    __delay_ms(2000);
          
     BITS_INTERRUPT_CPU_PRIORITY      = 0; //lowest
     BIT_INTERRUPT_NESTING_DISABLE    = 0;
@@ -35,7 +35,7 @@ int main(void) {
     T1CONbits.TGATE = 0; // Disable Gated Timer mode
     T1CONbits.TCKPS = 0b00; // Select 1:1 Prescaler
     TMR1 = 0x00; // Clear timer register
-    PR1 = 64000; // Load the period value
+    PR1 = 5000; // Load the period value
     IPC0bits.T1IP = 0x01; // Set Timer1 Interrupt Priority Level
     IFS0bits.T1IF = 0; // Clear Timer1 Interrupt Flag
     IEC0bits.T1IE = 1; // Enable Timer1 interrupt
@@ -58,13 +58,25 @@ void __attribute__((interrupt)) _INT0Interrupt( void )
 }
 
 
-//Lets create a timer
+static unsigned short counter = 0;
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 {
-    //Maybe we must write 0 
-    PIN_TURN_LOW(3);
-    __delay_ms(500);
-    PIN_TURN_HIGH(3);
+    counter++;
+    
+    if (counter == 4800)
+    {
+        PIN_TURN_HIGH(3);
+//        __delay_ms(100);
+//        PIN_TURN_LOW(3);       
+    }
+    
+    if(counter == 9600)
+    {
+        PIN_TURN_LOW(3);
+        counter = 0;
+    }
+
+    
     
     
     IFS0bits.T1IF = 0; 

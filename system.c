@@ -22,7 +22,7 @@ void EnablePLL(unsigned long long freqIn, unsigned long long freqOut)
     unsigned short calculatedM, calculatedN1, calculatedN2;
     
     double currentError = 88.8;
-    double calculatedError = 99.9;
+    double calculatedError = 99.9; //just for first calc
     
     for (unsigned short m = Mmin; m <= Mmax; m++)
     {
