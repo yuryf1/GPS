@@ -26,6 +26,9 @@
 //M13 (GPS module power supply) transistor
 #define BIT_PIN_53_IO                        TRISFbits.TRISF8     //write
 #define BIT_PIN_53_SWITCH                    PORTFbits.RF8
+//RX from GPS UART
+#define BIT_PIN_55_IO                        TRISFbits.TRISF6     //write
+#define BIT_PIN_55_SWITCH                    PORTFbits.RF6
 //M1 (main power supply) transistor 
 #define BIT_PIN_87_IO                        TRISFbits.TRISF0     //write
 #define BIT_PIN_87_SWITCH                    PORTFbits.RF0
