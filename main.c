@@ -55,11 +55,26 @@ int main(void) {
     return 0;
 }
 
+
 bool previosBitIsHigh   = false;
 bool startBit           = false;
-short counter           = 0;
-short data[200];
+bool receiving          = false;
+#define DATA_LENGHT       8
+short bitNumber         = DATA_LENGHT;
+short buffer[DATA_LENGHT];
+char data[0];
 
+
+
+void BuildSymbol(short bit, short number)
+{
+    buffer[number] = bit;
+    
+    if(number == 0)
+    {
+        data[] = buffer;
+    }
+}
 
 void PutBit(short bit)
 {
@@ -72,9 +87,19 @@ void PutBit(short bit)
         previosBitIsHigh = true;
     }
     
-    if (startBit && counter < 190)
+    if (startBit)
     {
-        data[counter++] = bit;
+        if(bitNumber == DATA_LENGHT)
+        {
+            //Do nothing,
+            //because this is start bit
+        }
+        else
+        {
+            BuildSymbol(bit, bitNumber);
+        }
+              
+        bitNumber--;     
     }
 }
 
