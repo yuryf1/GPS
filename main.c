@@ -22,15 +22,19 @@ int main(void) {
     EnablePerepherealPower();
     EnableModuleGPS();
     //EnableModuleGSM();
-        
-    PIN_INIT_OUTPUT(3);
+       
     INIT_GPS_RECIEVE;
-         
+    
+    PIN_INIT_OUTPUT(3);
+    PIN_TURN_HIGH(3);
+    __delay_ms(1000);
+    PIN_TURN_LOW(3);
+      
     BITS_INTERRUPT_CPU_PRIORITY      = 0; //lowest
     BIT_INTERRUPT_NESTING_DISABLE    = 0;
-    BIT_INTERRUPT_PIN55_ENABLE       = 1;
-    BITS_INTERRUPT_PIN55_PRIORITY    = 7; //highest
-    BIT_INTERRUPT_PIN55_STATUS       = 0;
+//    BIT_INTERRUPT_PIN55_ENABLE       = 1;
+//    BITS_INTERRUPT_PIN55_PRIORITY    = 7; //highest
+//    BIT_INTERRUPT_PIN55_STATUS       = 0;
     
     T1CONbits.TON = 0; // Disable Timer
     T1CONbits.TCS = 0; // Select internal instruction cycle clock
@@ -51,45 +55,41 @@ int main(void) {
     return 0;
 }
 
+bool previosBitIsHigh   = false;
+bool startBit           = false;
+short counter           = 0;
+short data[200];
 
 
-bool startBit = false;
-void __attribute__((interrupt)) _INT0Interrupt( void )               
+void PutBit(short bit)
 {
-    startBit = true;
-      
-    BIT_INTERRUPT_PIN55_STATUS       = 0;
-    BIT_INTERRUPT_PIN55_ENABLE       = 0;
+    if(bit == 0)
+    {
+        startBit = previosBitIsHigh? true : false;
+    }
+    else
+    {
+        previosBitIsHigh = true;
+    }
+    
+    if (startBit && counter < 190)
+    {
+        data[counter++] = bit;
+    }
 }
 
-static bool finish = false;
-static unsigned short cycle = 0;
-static unsigned short counter1[18];
-static unsigned short counter2[18];
-//static char data = 0;//data |= (RX_GPS << counter);
+
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 {
-    if((cycle < 17) && startBit)
-    {
-        if(RX_GPS == 1)
-        {
-            if(finish == true)
-            {
-                cycle += 1;
-                finish= false;
-            }
-            counter1[cycle]++;
-        }
-        else
-        {
-            counter2[cycle]++;
-            finish = true;
-        }
-    }
-
+    PutBit(RX_GPS);
     IFS0bits.T1IF = 0; 
 }
 
+
+//void __attribute__((interrupt)) _INT0Interrupt( void )               
+//{    
+//    BIT_INTERRUPT_PIN55_STATUS       = 0;
+//}
 
 
 //Waiting for:
