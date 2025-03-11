@@ -21,7 +21,7 @@ int main(void) {
     EnablePLL(FINPUT,FOSC);
     EnablePerepherealPower();
     EnableModuleGPS();
-    //EnableModuleGSM();
+    EnableModuleGSM();
        
     INIT_GPS_RECIEVE;
     
@@ -62,7 +62,7 @@ bool receiving          = false;
 #define DATA_LENGHT       8
 short bitNumber         = DATA_LENGHT;
 short buffer[DATA_LENGHT];
-char data[0];
+char data;
 
 
 
@@ -72,7 +72,7 @@ void BuildSymbol(short bit, short number)
     
     if(number == 0)
     {
-        data[] = buffer;
+        data = buffer;
     }
 }
 
