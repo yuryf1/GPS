@@ -1,28 +1,47 @@
-// that contents of this file are not included more than once.  
 #ifndef XC_HEADER_TEMPLATE_H_SOFTWARE_UART
 #define	XC_HEADER_TEMPLATE_H_SOFTWARE_UART
 
 #include "pins.h"
-#define INIT_GPS_RECIEVE  PIN_INIT_INPUT(55)
-#define RX_GPS            PIN_GET_BIT(55)
+#define SOFTWARE_UART1_INIT  PIN_INIT_INPUT(55)
+#define SOFTWARE_UART1_READ  PIN_GET_BIT(55)
+#define SOFTWARE_UART2_INIT  
+#define SOFTWARE_UART2_READ  
 
-typedef struct 
+//If your devise has not prescaller leave only 'to1'
+enum prescaler
 {
+    to1   = 0b00,
+    to8   = 0b01,
+    to64  = 0b10,
+    to256 = 0b11          
+};
+
+typedef enum {
+    uart1 = 1, 
+    uart2 = 2, 
+    invalidFirst = 0, first = uart1, last = uart2
+} 
+uartPort_e;
+
+
+typedef struct {
     const unsigned short length; 
     const char* pointer;     
-} str_t;
+}
+str_t;
 
 
-typedef struct
-{
-  void     (*Send)    (char*);
-  str_t (*Recieve) (void);
+typedef struct {
+  //void     (*Send)    (char*);
+  str_t    (*Recieve) (void);
   void     (*Clear)   (str_t);  
-} software_uart_t;
+} 
+software_uart_t;
 
 
-software_uart_t UART_Initialize( unsigned long baudRate, 
-                                 unsigned long long fcy);
+software_uart_t UART_Initialize(uartPort_e port,
+                                unsigned long baudRate, 
+                                unsigned long long fcy);
 
 
 //Allocated bytes in a heap for every recieved message

@@ -3,7 +3,6 @@
  
 #include "pins.h"
 
-
 #define SET_PIN_POWER_SUPPLY_OUTPUT          PIN_INIT_OUTPUT(87)
 #define SET_PIN_POWER_SUPPLY_INPUT           PIN_INIT_INPUT(87) 
 #define SET_PIN_POWER_SUPPLY_LOW             PIN_TURN_LOW(87)
