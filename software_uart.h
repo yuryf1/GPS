@@ -7,14 +7,6 @@
 #define SOFTWARE_UART2_INIT  
 #define SOFTWARE_UART2_READ  
 
-//If your devise has not prescaller leave only 'to1'
-enum prescaler
-{
-    to1   = 0b00,
-    to8   = 0b01,
-    to64  = 0b10,
-    to256 = 0b11          
-};
 
 typedef enum {
     uart1 = 1, 
@@ -46,6 +38,7 @@ software_uart_t UART_Initialize(uartPort_e port,
 
 //Allocated bytes in a heap for every recieved message
 #define BUFFERLENGTH 256    
+
 
 
 

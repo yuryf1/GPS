@@ -1,0 +1,36 @@
+#ifndef TIMER_H
+#define	TIMER_H
+
+
+typedef enum {
+    timer1 = 1, 
+    timer2 = 2, 
+    timer3 = 3, 
+    timer4 = 4, 
+    timer5 = 5, 
+    timer6 = 6, 
+    timer7 = 7, 
+    timer8 = 8, 
+    timer9 = 9,
+    invalidFirst = 0, first = timer1, last = uart2
+} 
+timers_e;
+
+
+//If your devise has not prescaller leave only {1, 0b00}
+typedef struct {
+    const unsigned short scale; 
+    const unsigned short registerValue;     
+}
+timer_prescaler_t;
+
+timer_prescaler_t prescalers[] = 
+        [
+            {1, 0b00},   //00 = 1:1
+            {8, 0b01},   //01 = 1:8 
+            {64, 0b10},  //10 = 1:64
+            {256, 0b11}  //11 = 1:256
+        ];
+
+#endif	/* TIMER_H */
+
