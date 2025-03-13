@@ -12,6 +12,7 @@
       <itemPath>perephereal_methods.h</itemPath>
       <itemPath>software_uart.h</itemPath>
       <itemPath>timer.h</itemPath>
+      <itemPath>timer_methods.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -31,6 +32,8 @@
       <itemPath>system_methods.c</itemPath>
       <itemPath>perephereal_methods.c</itemPath>
       <itemPath>software_uart.c</itemPath>
+      <itemPath>timer.c</itemPath>
+      <itemPath>timer_methods.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -1322,6 +1325,8 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-157ff"/>
         <property key="poweroptions.powerenable" value="true"/>
+        <property key="programmerToGoFilePath"
+                  value="E:/Irrigation/GPS/debug/default/Tests_ptg"/>
         <property key="programmerToGoImageName" value="Tests_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

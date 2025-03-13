@@ -31,7 +31,7 @@ typedef struct {
 software_uart_t;
 
 
-software_uart_t UART_Initialize(uartPort_e port,
+software_uart_t Software_UART_Initialize(uartPort_e port,
                                 unsigned long baudRate, 
                                 unsigned long long fcy);
 

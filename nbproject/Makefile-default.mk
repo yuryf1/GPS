@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c system.c configuration_bits.c system_methods.c perephereal_methods.c software_uart.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c system.c configuration_bits.c system_methods.c perephereal_methods.c software_uart.c timer.c timer_methods.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/system.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/system_methods.o ${OBJECTDIR}/perephereal_methods.o ${OBJECTDIR}/software_uart.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/configuration_bits.o.d ${OBJECTDIR}/system_methods.o.d ${OBJECTDIR}/perephereal_methods.o.d ${OBJECTDIR}/software_uart.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/system.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/system_methods.o ${OBJECTDIR}/perephereal_methods.o ${OBJECTDIR}/software_uart.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/timer_methods.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/system.o.d ${OBJECTDIR}/configuration_bits.o.d ${OBJECTDIR}/system_methods.o.d ${OBJECTDIR}/perephereal_methods.o.d ${OBJECTDIR}/software_uart.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/timer_methods.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/system.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/system_methods.o ${OBJECTDIR}/perephereal_methods.o ${OBJECTDIR}/software_uart.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/system.o ${OBJECTDIR}/configuration_bits.o ${OBJECTDIR}/system_methods.o ${OBJECTDIR}/perephereal_methods.o ${OBJECTDIR}/software_uart.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/timer_methods.o
 
 # Source Files
-SOURCEFILES=main.c system.c configuration_bits.c system_methods.c perephereal_methods.c software_uart.c
+SOURCEFILES=main.c system.c configuration_bits.c system_methods.c perephereal_methods.c software_uart.c timer.c timer_methods.c
 
 
 
@@ -125,6 +125,18 @@ ${OBJECTDIR}/software_uart.o: software_uart.c  .generated_files/flags/default/f6
 	@${RM} ${OBJECTDIR}/software_uart.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  software_uart.c  -o ${OBJECTDIR}/software_uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/software_uart.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/timer.o: timer.c  .generated_files/flags/default/11154746cd7d8c79339323add5d4dd0c99a26e0a .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer.o.d 
+	@${RM} ${OBJECTDIR}/timer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  timer.c  -o ${OBJECTDIR}/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/timer_methods.o: timer_methods.c  .generated_files/flags/default/ea84f3fe843336d29e0eca08a77dd4581eb7a7cf .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer_methods.o.d 
+	@${RM} ${OBJECTDIR}/timer_methods.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  timer_methods.c  -o ${OBJECTDIR}/timer_methods.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer_methods.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/91191181e611efe4f4ef2581dcb98f78e5613dc9 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
@@ -161,6 +173,18 @@ ${OBJECTDIR}/software_uart.o: software_uart.c  .generated_files/flags/default/59
 	@${RM} ${OBJECTDIR}/software_uart.o.d 
 	@${RM} ${OBJECTDIR}/software_uart.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  software_uart.c  -o ${OBJECTDIR}/software_uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/software_uart.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/timer.o: timer.c  .generated_files/flags/default/39ed955d7d1b00845698dcde17013a7f5a594128 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer.o.d 
+	@${RM} ${OBJECTDIR}/timer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  timer.c  -o ${OBJECTDIR}/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/timer_methods.o: timer_methods.c  .generated_files/flags/default/425dd6e684fa8004b1e22fd9eb8b1c9e4ab76f4 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer_methods.o.d 
+	@${RM} ${OBJECTDIR}/timer_methods.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  timer_methods.c  -o ${OBJECTDIR}/timer_methods.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer_methods.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

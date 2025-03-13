@@ -1,7 +1,6 @@
 #ifndef TIMER_H
 #define	TIMER_H
 
-
 typedef enum {
     timer1 = 1, 
     timer2 = 2, 
@@ -17,6 +16,21 @@ typedef enum {
 timers_e;
 
 
+typedef struct
+{
+  void  (*Start)      (void);
+  void  (*Stop)       (void);
+  void  (*Terminate)  (void);
+} timer_t;
+
+timer_t TimerInitialize(const timers_e number,
+                        const size_t baudrate,
+                        void (*Action)(short),
+                        short object);
+
+
+
+//OPTIONS
 //If your devise has not prescaller leave only {1, 0b00}
 typedef struct {
     const unsigned short scale; 

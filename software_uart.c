@@ -11,9 +11,9 @@
 //}
 
 
-software_uart_t UART_Initialize(uartPort_e           port,
-                                unsigned long        baudRate, 
-                                unsigned long long   fcy)
+software_uart_t Software_UART_Initialize(uartPort_e           port,
+                                         unsigned long        baudRate, 
+                                         unsigned long long   fcy)
 {
     SOFTWARE_UART1_INIT;
     
