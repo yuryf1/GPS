@@ -34,7 +34,7 @@ timer_t TimerInitialize(const timers_e number,
 //If your devise has not prescaller leave only {1, 0b00}
 typedef struct {
     const unsigned short scale; 
-    const unsigned short registerValue;     
+    const unsigned short bitsValue;     
 }
 timer_prescaler_t;
 

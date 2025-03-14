@@ -70,7 +70,10 @@
 *********************************** Timers *************************************
 *******************************************************************************/
 #define BIT_TIMER1_SWITCH                    T1CONbits.TON
-#define BIT_TIMER1_EXTERNAL_CLOCK_SOURSE     T1CONbits.TCS
+#define BIT_TIMER1_EXTERNAL_CLOCK            T1CONbits.TCS
+#define BIT_TIMER1_GATEMODE                  T1CONbits.TGATE
+#define BITS_TIMER1_COUNTER                  TMR1
+#define BITS_TIMER1_PRESCALER                T1CONbits.TCKPS
 /*******************************************************************************
 ******************************* Interrups **************************************
 *******************************************************************************/

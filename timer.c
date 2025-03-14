@@ -4,10 +4,10 @@
 void __Timer1_Init()
 {
     Timer1_Disable();
-    Timer1_SetInternalClockFromFCY();
-    T1CONbits.TGATE = 0; // Disable Gated Timer mode
-    T1CONbits.TCKPS = 0b01;//0b00; // Select 1:1 Prescaler
-    TMR1 = 0x00; // Clear timer register
+    Timer1_ExternalClock_Disable();
+    Timer1_MeasureMode_Disable();
+    Timer1_Prescaler_Set(prescalers[1].bitsValue);
+    Timer1_MeasureMode_Counter_Set(0); //
     PR1 = 625;//5000; // Load the period value
     IPC0bits.T1IP = 0x01; // Set Timer1 Interrupt Priority Level
     IFS0bits.T1IF = 0; // Clear Timer1 Interrupt Flag
