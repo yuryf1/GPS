@@ -50,3 +50,38 @@ void Timer1_Prescaler_Set(unsigned short prescalerInBitsValue)
 {
     BITS_TIMER1_PRESCALER = prescalerInBitsValue;
 }
+
+void Timer1_Period_Set(size_t pr)
+{
+    BITS_TIMER1_PERIOD = pr;
+}
+
+size_t Timer1_Period_Get(void)
+{
+    return BITS_TIMER1_PERIOD;
+}
+
+void Timer1_PriorityFrom0to7_Set(unsigned short priority)
+{
+    BITS_TIMER1_PRIORITY = priority;
+}
+
+unsigned short Timer1_PriorityFrom0to7_Get(void)
+{
+    return BITS_TIMER1_PRIORITY;
+}
+
+void Timer1_InterruptFlag_Clear(void)
+{
+    BIT_TIMER1_INTERRUPT_FLAG = 0;
+}
+
+void Timer1_InterruptFlag_Clear(void)
+{
+    BIT_TIMER1_INTERRUPT_FLAG = 0;
+}
+
+void Timer1_InterruptFlag_Fill(void)
+{
+    BIT_TIMER1_INTERRUPT_FLAG = 1;
+}

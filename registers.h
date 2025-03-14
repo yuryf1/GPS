@@ -74,6 +74,10 @@
 #define BIT_TIMER1_GATEMODE                  T1CONbits.TGATE
 #define BITS_TIMER1_COUNTER                  TMR1
 #define BITS_TIMER1_PRESCALER                T1CONbits.TCKPS
+#define BITS_TIMER1_PERIOD                   PR1
+#define BITS_TIMER1_PRIORITY                 IPC0bits.T1IP
+#define BIT_TIMER1_INTERRUPT_FLAG            IFS0bits.T1IF
+
 /*******************************************************************************
 ******************************* Interrups **************************************
 *******************************************************************************/
