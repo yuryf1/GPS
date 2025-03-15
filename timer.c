@@ -1,5 +1,5 @@
 #include "timer.h"
-
+#include <stddef.h>
 
 void __Timer1_Init()
 {
@@ -11,7 +11,7 @@ void __Timer1_Init()
     Timer1_Period_Set(625); //5000 for FCY == 40000000
     Timer1_PriorityFrom0to7_Set(1);
     Timer1_InterruptFlag_Clear();
-    IEC0bits.T1IE = 1; // Enable Timer1 interrupt
+    Timer1_Interrupt_Enable();
     Timer1_Enable();
 }
 
@@ -55,7 +55,5 @@ timer_t TimerInitialize(const timers_e number,
             printf("No such UART port for this device");
     }
     
-    
-    timer_t client;
     return client;
 }

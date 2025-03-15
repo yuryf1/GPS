@@ -1,6 +1,8 @@
 #ifndef TIMER_H
 #define	TIMER_H
 
+#include "timer_methods.h"
+
 typedef enum {
     timer1 = 1, 
     timer2 = 2, 
@@ -11,7 +13,7 @@ typedef enum {
     timer7 = 7, 
     timer8 = 8, 
     timer9 = 9,
-    invalidFirst = 0, first = timer1, last = uart2
+    invalidFirst = 0, first = timer1, last = timer9
 } 
 timers_e;
 

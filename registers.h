@@ -77,6 +77,7 @@
 #define BITS_TIMER1_PERIOD                   PR1
 #define BITS_TIMER1_PRIORITY                 IPC0bits.T1IP
 #define BIT_TIMER1_INTERRUPT_FLAG            IFS0bits.T1IF
+#define BIT_TIMER1_INTERRUPT_ENABLE          IEC0bits.T1IE
 
 /*******************************************************************************
 ******************************* Interrups **************************************

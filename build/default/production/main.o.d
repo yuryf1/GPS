@@ -1,5 +1,5 @@
 build/default/production/main.o: main.c configuration.h system.h \
- perephereal_methods.h pins.h registers.h
+ perephereal_methods.h pins.h registers.h software_uart.h
 
 configuration.h:
 
@@ -10,3 +10,5 @@ perephereal_methods.h:
 pins.h:
 
 registers.h:
+
+software_uart.h:

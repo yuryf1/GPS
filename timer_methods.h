@@ -2,9 +2,9 @@
 #define	TIMER_METHODS_H
 
 #include "registers.h"
+#include <stddef.h>
 
 
-#endif	/* TIMER_METHODS_H */
 
 void Timer1_Enable(void);
 void Timer1_Disable(void);
@@ -25,3 +25,10 @@ unsigned short Timer1_PriorityFrom0to7_Get(void);
 
 void Timer1_InterruptFlag_Clear(void);
 void Timer1_InterruptFlag_Fill(void);
+
+void Timer1_Interrupt_Enable(void);
+void Timer1_Interrupt_Disable(void);
+
+
+
+#endif	/* TIMER_METHODS_H */
