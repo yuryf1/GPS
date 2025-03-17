@@ -25,32 +25,13 @@ timer_t TimerInitialize(const timers_e number,
     switch(number)
     {
         case timer1: 
+        __Timer1_Init();
+        break;   
         
-        break;      
         case timer2: 
          
         break; 
-        case timer3: 
         
-        break;      
-        case timer4: 
-         
-        break;  
-        case timer5: 
-        
-        break;      
-        case timer6: 
-         
-        break;
-        case timer7: 
-         
-        break;  
-        case timer8: 
-        
-        break;      
-        case timer9: 
-         
-        break; 
         default:
             printf("No such UART port for this device");
     }

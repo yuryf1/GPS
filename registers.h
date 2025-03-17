@@ -79,6 +79,17 @@
 #define BIT_TIMER1_INTERRUPT_FLAG            IFS0bits.T1IF
 #define BIT_TIMER1_INTERRUPT_ENABLE          IEC0bits.T1IE
 
+#define BIT_TIMER2_SWITCH                    T2CONbits.TON
+#define BIT_TIMER2_EXTERNAL_CLOCK            T2CONbits.TCS
+#define BIT_TIMER2_GATEMODE                  T2CONbits.TGATE
+#define BITS_TIMER2_COUNTER                  TMR2
+#define BITS_TIMER2_PRESCALER                T2CONbits.TCKPS
+#define BITS_TIMER2_PERIOD                   PR2
+#define BITS_TIMER2_PRIORITY                 IPC1bits.T2IP
+#define BIT_TIMER2_INTERRUPT_FLAG            IFS0bits.T2IF
+#define BIT_TIMER2_INTERRUPT_ENABLE          IEC0bits.T2IE
+
+
 /*******************************************************************************
 ******************************* Interrups **************************************
 *******************************************************************************/
