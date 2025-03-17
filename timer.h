@@ -27,6 +27,7 @@ typedef struct
 
 timer_t TimerInitialize(const timers_e number,
                         const size_t baudrate,
+                        const unsigned long long fcy,
                         void (*Action)(short),
                         short object);
 
