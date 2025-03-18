@@ -2,33 +2,87 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+//for 4800 baudrate , period is 625 and 1:8 prescaler or period is 5000 and 1:1 prescaler
 
-void __Timer1_Init()
-{
-    Timer1_Disable();
+void (*Timer1Action)(short);
+short * timer1Object;
+//void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
+//{
+//    Timer1Action(timer1Object);
+//    Timer1_InterruptFlag_Clear(); 
+//}
+
+void    __Timer1_Start(void) { Timer1_Enable(); }
+void    __Timer1_Stop(void)  { Timer1_Disable();}
+
+timer_t __Timer1_Init(size_t period, 
+                      unsigned short prescaler, 
+                      void (*Action)(short),
+                      short * object)
+{ 
     Timer1_ExternalClock_Disable();
     Timer1_MeasureMode_Disable();
-    Timer1_Prescaler_Set(prescalers[1].bitsValue);
-    Timer1_MeasureMode_Counter_Set(0); //
-    Timer1_Period_Set(625); //5000 for FCY == 40000000
-    Timer1_PriorityFrom0to7_Set(1);
+    Timer1_Prescaler_Set(prescaler);
+    Timer1_MeasureMode_Counter_Set(0); 
+    Timer1_Period_Set(period); 
+    Timer1_PriorityFrom0to7_Set(1); 
     Timer1_InterruptFlag_Clear();
     Timer1_Interrupt_Enable();
-    Timer1_Enable();
+    
+    Timer1Action = Action;
+    timer1Object = object;
+    
+    timer_t client = {&__Timer1_Start, &__Timer1_Stop};
+    return client;
 }
 
-void __Timer2_Init()
+
+void (*Timer2Action)(short);
+short * timer2Object;
+void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
 {
-    Timer2_Disable();
+    Timer2Action(timer2Object);
+    Timer2_InterruptFlag_Clear(); 
+}
+
+void    __Timer2_Start(void) { Timer2_Enable(); }
+void    __Timer2_Stop(void)  { Timer2_Disable();}
+
+timer_t __Timer2_Init(size_t period, 
+                      unsigned short prescaler, 
+                      void (*Action)(short),
+                      short * object)
+{
     Timer2_ExternalClock_Disable();
     Timer2_MeasureMode_Disable();
-    Timer2_Prescaler_Set(prescalers[1].bitsValue);
-    Timer2_MeasureMode_Counter_Set(0); //
-    Timer2_Period_Set(625); //5000 for FCY == 40000000
+    Timer2_Prescaler_Set(prescaler);
+    Timer2_MeasureMode_Counter_Set(0); 
+    Timer2_Period_Set(period);
     Timer2_PriorityFrom0to7_Set(1);
     Timer2_InterruptFlag_Clear();
     Timer2_Interrupt_Enable();
-    Timer2_Enable();
+    
+    Timer1Action = Action;
+    timer1Object = object;
+    
+    timer_t client = {&__Timer2_Start, &__Timer2_Stop};
+    return client;
+}
+
+
+
+size_t __CalculateBaudrate(const unsigned long long fcy,
+                           const unsigned short prescaler,
+                           const size_t period)
+{
+    return  (fcy / prescaler) / period;
+}
+
+size_t __CalculatePeriod(const unsigned long long fcy,
+                         const unsigned short prescaler,
+                         const size_t baudrate)
+{
+    return (fcy / prescaler) / baudrate;
 }
 
 unsigned long __AbsoluteDifference (unsigned long value1, unsigned long value2)
@@ -37,73 +91,64 @@ unsigned long __AbsoluteDifference (unsigned long value1, unsigned long value2)
 }
 
 size_t __CalculateError(const unsigned long long fcy,
+                        const unsigned short prescaler,
                         const size_t baudrate,
-                        const size_t pr, 
-                        const unsigned short prescaler)
+                        const size_t period)
 {
-    size_t calcBaudrate = (fcy / prescaler) / pr;
+    size_t calcBaudrate = __CalculateBaudrate(fcy, prescaler, period);
     return __AbsoluteDifference(calcBaudrate, baudrate);
 }
 
-size_t __GetPeriod()
+
+timer_prescaler_t __ChosePrescaler(const unsigned long long fcy, 
+                                          const size_t baudrate,
+                                          const timer_prescaler_t * prescalers,
+                                          const unsigned short prescalersLenght)
 {
     size_t period;
-    
-    return period;
-}
-
-size_t __CalculatePeriod(const unsigned long long fcy, 
-                         const size_t baudrate,
-                         const timer_prescaler_t * prescalers,
-                         const unsigned short prescalersLenght)
-{
-    unsigned long long periodWithoutPrescaler = fcy / baudrate;
-    
-    size_t pr;
     size_t error = baudrate;
-    size_t calcError;
-    unsigned short scaler;
-    unsigned short scalerNumber;
+    size_t calcError = 0;
+    unsigned short prescalerNumber;
+    
     for (unsigned short i = 0; i < prescalersLenght; i++)
     {
-        scaler = prescalers[i].scale;
-        pr = periodWithoutPrescaler / scaler;
-        calcError = __CalculateError(fcy, baudrate, pr, scaler);
+        period    = __CalculatePeriod(fcy, prescalers[i].scale, baudrate);
+        calcError = __CalculateError (fcy, prescalers[i].scale, baudrate, period);
  
         if (calcError < error)
         {
             error = calcError;
-            scalerNumber = i;
+            prescalerNumber = i;
         }   
     }
-       
-    return pr;
+    return prescalers[prescalerNumber];
 }
 
-timer_t TimerInitialize(const timers_e number,
-                        const size_t baudrate,
-                        const unsigned long long fcy,
-                        void (*Action)(short),
-                        short object)
+
+timer_t Timer(const timers_e number,
+              const size_t baudrate,
+              const unsigned long long fcy,
+              void (*Action)(short),
+              short * object)
 {
-    timer_t client;
+    timer_prescaler_t prescaler = __ChosePrescaler(fcy, baudrate, prescalers, 
+                                  sizeof(prescalers) / sizeof(prescalers[0]));
+    size_t pr = __CalculatePeriod(fcy, prescaler.scale, baudrate);
     
-    size_t period = __CalculatePeriod(fcy, baudrate, prescalers, 
-                                      sizeof(prescalers) / sizeof(prescalers[0]));
-    
+    timer_t timer;
     switch(number)
     {
         case timer1: 
-        __Timer1_Init();
+             timer = __Timer1_Init(pr, prescaler.bitsValue, Action, object);
         break;   
         
         case timer2: 
-        __Timer2_Init(); 
+             timer = __Timer2_Init(pr, prescaler.bitsValue, Action, object);
         break; 
         
         default:
-            printf("No such UART port for this device");
+            printf("No such Timer for this device");
     }
     
-    return client;
+    return timer;
 }

@@ -6,14 +6,7 @@
 typedef enum {
     timer1 = 1, 
     timer2 = 2, 
-    timer3 = 3, 
-    timer4 = 4, 
-    timer5 = 5, 
-    timer6 = 6, 
-    timer7 = 7, 
-    timer8 = 8, 
-    timer9 = 9,
-    invalidFirst = 0, first = timer1, last = timer9
+    invalidFirst = 0, first = timer1, last = timer2
 } 
 timers_e;
 
@@ -22,14 +15,13 @@ typedef struct
 {
   void  (*Start)      (void);
   void  (*Stop)       (void);
-  void  (*Terminate)  (void);
 } timer_t;
 
-timer_t TimerInitialize(const timers_e number,
-                        const size_t baudrate,
-                        const unsigned long long fcy,
-                        void (*Action)(short),
-                        short object);
+timer_t Timer(const timers_e number,
+              const size_t baudrate,
+              const unsigned long long fcy,
+              void (*Action)(short),
+              short * object);
 
 
 
