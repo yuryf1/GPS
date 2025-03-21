@@ -2,15 +2,23 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+timer_prescaler_t prescalers[] = 
+{
+            {1, 0b00},   //00 = 1:1
+            {8, 0b01},   //01 = 1:8 
+            {64, 0b10},  //10 = 1:64
+            {256, 0b11}  //11 = 1:256
+        };
+
 //for 4800 baudrate , period is 625 and 1:8 prescaler or period is 5000 and 1:1 prescaler
 
 void (*Timer1Action)(short);
 short * timer1Object;
-//void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
-//{
-//    Timer1Action(timer1Object);
-//    Timer1_InterruptFlag_Clear(); 
-//}
+void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
+{
+    Timer1Action(timer1Object);
+    Timer1_InterruptFlag_Clear(); 
+}
 
 void    __Timer1_Start(void) { Timer1_Enable(); }
 void    __Timer1_Stop(void)  { Timer1_Disable();}
