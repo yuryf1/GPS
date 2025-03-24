@@ -14,11 +14,11 @@ int main(void) {
     EnablePLL(FINPUT,FOSC);
     EnablePerepherealPower();
     EnableModuleGPS();
-    EnableModuleGSM();
+    //EnableModuleGSM();
        
     PIN_INIT_OUTPUT(3);
     PIN_TURN_HIGH(3);
-    __delay_ms(1000);
+    __delay_ms(20000);
     PIN_TURN_LOW(3);
     
     software_uart_t gps = Software_UART_Initialize(uart1, 1233, 45657);

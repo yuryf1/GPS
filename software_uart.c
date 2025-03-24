@@ -4,20 +4,26 @@
 #include <xc.h>
 
 #include <stdbool.h>            // true/false
+#include <stdlib.h>             // calloc
+#include <string.h>   
 
-//size_t __CalculatePR()
-//{
-//    
-//}
 
+str_t Recieve(void)
+{
+    
+}
+
+void Clear()
+{
+    
+}
 
 software_uart_t Software_UART_Initialize(uartPort_e           port,
-                                         unsigned long        baudRate, 
+                                         unsigned long        baudRate,
                                          unsigned long long   fcy)
 {
     SOFTWARE_UART1_INIT;
-    
-        
+
     T1CONbits.TON = 0; // Disable Timer
     T1CONbits.TCS = 0; // Select internal instruction cycle clock
     T1CONbits.TGATE = 0; // Disable Gated Timer mode
@@ -28,62 +34,62 @@ software_uart_t Software_UART_Initialize(uartPort_e           port,
     IFS0bits.T1IF = 0; // Clear Timer1 Interrupt Flag
     IEC0bits.T1IE = 1; // Enable Timer1 interrupt
     T1CONbits.TON = 1; // Start Timer
-     
+
     software_uart_t client;
     return client;
 }
 
 
-bool previosBitIsHigh   = false;
-bool startBit           = false;
-bool receiving          = false;
-//#define DATA_LENGHT       8
-//short bitNumber         = DATA_LENGHT;
-//short buffer[DATA_LENGHT];
-char data[120];
-short counter = 0;
-
-
-//void BuildSymbol(short bit)
-//{
-//    buffer[number] = bit;
-//    
-//    if(number == 0)
-//    {
-//        data = buffer;
-//    }
-//}
+#define BYTE_LENGHT 8
 
 void PutBit(short bit)
 {
-    if(bit == 0)
+    static char data[160];
+    static short stringCounter = 0;
+    static short byteCounter = 0;
+    static bool startBit = false;
+    static bool previosBitIsHigh = false;
+
+    if(stringCounter == 159)
     {
-        startBit = previosBitIsHigh? true : false;
+        Nop();
+        Nop();
+        Nop();
+        Nop();
+    }
+    
+    if (startBit)
+    {
+        if (byteCounter < BYTE_LENGHT)
+        {
+            data[stringCounter] |= (bit << byteCounter++);
+        }
+        else
+        {
+            if(bit == 1) //Stop bit
+            {
+                startBit = false;
+                previosBitIsHigh = false;
+                stringCounter++;
+            }
+            byteCounter = 0;
+        }
     }
     else
     {
-        previosBitIsHigh = true;
-    }
-    
-    if (counter < 100 && startBit)
-    {
-        data[counter++] = bit;
-//        if(bitNumber == DATA_LENGHT)
-//        {
-//            //Do nothing,
-//            //because this is start bit
-//        }
-//        else
-//        {
-//            BuildSymbol(bit, bitNumber);
-//        }
-//              
-//        bitNumber--;     
+        if(bit == 0)
+        {
+            startBit = previosBitIsHigh? true : false;
+        }
+        else
+        {
+            previosBitIsHigh = true;
+        }
     }
 }
 
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 {
     PutBit(SOFTWARE_UART1_READ);
-    IFS0bits.T1IF = 0; 
+    IFS0bits.T1IF = 0;
 }
