@@ -2,6 +2,8 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+#include "pins.h"
+
 timer_prescaler_t prescalers[] = 
 {
             {1, 0b00},   //00 = 1:1
