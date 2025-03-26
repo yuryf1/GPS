@@ -37,7 +37,7 @@ software_uart_t Software_UART_Initialize(uartPort_e port,
 
 
 //Allocated bytes in a heap for every recieved message
-#define BUFFERLENGTH 256    
+#define BUFFERLENGTH 128    
 
 
 

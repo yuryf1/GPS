@@ -5,6 +5,8 @@
         <group>
             <file>file:/D:/Hardware/GPStest/GPSold/software_uart.c</file>
             <file>file:/D:/Hardware/GPStest/GPSold/main.c</file>
+            <file>file:/D:/Hardware/GPStest/GPSold/timer.c</file>
+            <file>file:/D:/Hardware/GPStest/GPSold/timer.h</file>
             <file>file:/D:/Hardware/GPStest/GPSold/software_uart.h</file>
         </group>
     </open-files>
