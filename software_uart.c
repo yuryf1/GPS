@@ -7,7 +7,7 @@
 #include <stdlib.h>             // calloc
 #include <string.h>   
 
-bool receiving = true;
+
 bool * inProgress;
 char response[BUFFERLENGTH];
 unsigned short bufferLenght_g;
@@ -45,7 +45,6 @@ software_uart_t Software_UART_Initialize(uartPort_e           port,
     IEC0bits.T1IE = 1; // Enable Timer1 interrupt
     T1CONbits.TON = 1; // Start Timer
      
-    //buffer_g = buffer;
     software_uart_t client;
     return client;
 }
@@ -60,33 +59,65 @@ void PutBit(short bit)
     static short stringCounter         = 0;
     static short byteCounter           = 0;
     static bool startBit               = false;
+    static bool stopBit                = false;
     static bool previosBitIsHigh       = false;
+    static bool endOfString            = false;
+    
+    //templorary, trying to create best algorithm
+    static bool dataBit                = false;
 
     if (startBit)
     {
-        if (byteCounter < BYTE_LENGHT)
+        buffer_g[stringCounter] |= (bit << byteCounter);
+        
+        dataBit = byteCounter < BYTE_LENGHT;
+        byteCounter = dataBit? (byteCounter + 1) : (0);
+        stopBit = (bit == 1 && !dataBit)? true : false;
+        
+        if(stopBit)                             
         {
-            buffer_g[stringCounter] |= (bit << byteCounter++);
-        }
-        else
-        {
-            byteCounter = 0;
-            
-            if(bit == 1)                             //if stop bit
-            {
-                if(buffer_g[stringCounter-1] == CARRIAGE_RETURN 
-                      && 
-                   buffer_g[stringCounter]   == LINE_FEED) //if end of the string
-                {
-                    bufferLenght_g = stringCounter;
-                    //receiving = false;
-                    inProgress = false;
-                }
+            endOfString = buffer_g[stringCounter-1] == CARRIAGE_RETURN 
+                             && 
+                          buffer_g[stringCounter]   == LINE_FEED;
                 
-                startBit = false;
-                stringCounter++;                     // Next symbol please
-            }     
-        }
+            if(endOfString) 
+            {
+                bufferLenght_g = stringCounter;
+                inProgress = false;
+            }
+                
+            startBit = false;
+            stringCounter++;                     // Next symbol please
+        }     
+        
+        
+//        dataBit = byteCounter < BYTE_LENGHT;
+//        
+//        if (dataBit)
+//        {
+//            buffer_g[stringCounter] |= (bit << byteCounter++);
+//        }
+//        else
+//        {
+//            byteCounter = 0;
+//            
+//               stopBit = (bit == 1)? true : false; 
+//            if(stopBit)                             
+//            {
+//                endOfString = buffer_g[stringCounter-1] == CARRIAGE_RETURN 
+//                                 && 
+//                              buffer_g[stringCounter]   == LINE_FEED;
+//                
+//                if(endOfString) 
+//                {
+//                    bufferLenght_g = stringCounter;
+//                    inProgress = false;
+//                }
+//                
+//                startBit = false;
+//                stringCounter++;                     // Next symbol please
+//            }     
+//        }
     }
     else
     {
@@ -105,7 +136,6 @@ void PutBit(short bit)
 
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 { 
-    //if(receiving)
     if(inProgress)
     {
         PutBit(SOFTWARE_UART1_READ);

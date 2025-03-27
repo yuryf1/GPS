@@ -33,13 +33,7 @@ typedef struct {
 }
 timer_prescaler_t;
 
-timer_prescaler_t prescalers[] = 
-{
-            {1, 0b00},   //00 = 1:1
-            {8, 0b01},   //01 = 1:8 
-            {64, 0b10},  //10 = 1:64
-            {256, 0b11}  //11 = 1:256
-        };
+
 
 #endif	/* TIMER_H */
 
