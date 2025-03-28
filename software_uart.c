@@ -10,7 +10,7 @@
 
 bool * inProgress;
 char response[BUFFERLENGTH];
-unsigned short bufferLenght_g;
+short bufferLenght_g;
 char * buffer_g;
 
 
@@ -50,74 +50,109 @@ software_uart_t Software_UART_Initialize(uartPort_e           port,
 }
 
 
-#define BYTE_LENGHT       8
-#define LINE_FEED         0xa // \n
-#define CARRIAGE_RETURN   0xd // \r
 
-void PutBit(short bit)
-{
-    static short stringCounter         = 0;
-    static short byteCounter           = 0;
-    static bool startBit               = false;
-    static bool stopBit                = false;
-    static bool previosBitIsHigh       = false;
-    static bool endOfString            = false;
-    
-    //templorary, trying to create best algorithm
-    static bool dataBit                = false;
 
-    if (startBit)
-    {
-        buffer_g[stringCounter] |= (bit << byteCounter);
-        
-        dataBit = byteCounter < BYTE_LENGHT;
-        byteCounter = dataBit? (byteCounter + 1) : (0);
-        stopBit = (bit == 1 && !dataBit)? true : false;
-        
-        if(stopBit)                             
-        {
-            endOfString = buffer_g[stringCounter-1] == CARRIAGE_RETURN 
-                             && 
-                          buffer_g[stringCounter]   == LINE_FEED;
-                
-            if(endOfString) 
-            {
-                bufferLenght_g = stringCounter;
-                inProgress = false;
-            }
-                
-            startBit = false;
-            stringCounter++;                     // Next symbol please
-        }     
-        
-        
-//        dataBit = byteCounter < BYTE_LENGHT;
+
+
+//#define BYTE_LENGHT       8
+//#define LINE_FEED         0xa // \n
+//#define CARRIAGE_RETURN   0xd // \r
+//
+//void PutBit(short bit)
+//{
+//    static short stringCounter         = 0;
+//    static short byteCounter           = 0;
+//    static bool startBit               = false;
+//    static bool stopBit                = false;
+//    static bool previosBitIsHigh       = false;
+//    static bool endOfString            = false;
+//    
+//    //templorary, trying to create best algorithm
+//    static bool dataBit                = false;
+//
+//    if (startBit)
+//    {
+//        buffer_g[stringCounter] |= (bit << byteCounter);
 //        
-//        if (dataBit)
+//        dataBit = byteCounter < BYTE_LENGHT;
+//        byteCounter = dataBit? (byteCounter + 1) : (0);
+//        stopBit = (bit == 1 && !dataBit)? true : false;
+//        
+//        if(stopBit)                             
 //        {
-//            buffer_g[stringCounter] |= (bit << byteCounter++);
+//            endOfString = buffer_g[stringCounter-1] == CARRIAGE_RETURN 
+//                             && 
+//                          buffer_g[stringCounter]   == LINE_FEED;
+//                
+//            if(endOfString) 
+//            {
+//                bufferLenght_g = stringCounter;
+//                inProgress = false;
+//            }
+//                
+//            startBit = false;
+//            stringCounter++;                     // Next symbol please
+//        }     
+//    }
+//    else
+//    {
+//        if(bit == 0)
+//        {
+//            startBit = previosBitIsHigh? true : false;
+//            previosBitIsHigh = false;    //Clear flag
+//                     
 //        }
 //        else
 //        {
-//            byteCounter = 0;
-//            
-//               stopBit = (bit == 1)? true : false; 
-//            if(stopBit)                             
-//            {
-//                endOfString = buffer_g[stringCounter-1] == CARRIAGE_RETURN 
-//                                 && 
-//                              buffer_g[stringCounter]   == LINE_FEED;
-//                
-//                if(endOfString) 
-//                {
-//                    bufferLenght_g = stringCounter;
-//                    inProgress = false;
-//                }
-//                
-//                startBit = false;
-//                stringCounter++;                     // Next symbol please
-//            }     
+//            previosBitIsHigh = true;  
 //        }
+//    }
+//}
+
+
+
+
+
+
+void PutBit(short bit)
+{
+    static const short byteLenght            = 8;
+    static const char lineFeedSymbol         = 0xa;
+    static const char carriageReturnSymbol   = 0xd;
+    
+    static short stringCounter               = 0;
+    static short byteCounter                 = 0;
+    static bool startBit                     = false;
+    static bool stopBit                      = false;
+    static bool previosBitIsHigh             = false;
+    static bool endOfString                  = false;
+    static bool dataBit                      = false;
+    
+    if (startBit)
+    {
+        dataBit = byteCounter < byteLenght;
+        if(dataBit)
+        {
+            buffer_g[stringCounter] |= (bit << byteCounter++);
+        }
+        else
+        {
+            byteCounter = 0;
+            stopBit = (bit == 1 && !dataBit)? true : false;
+            if(stopBit)                             
+            {
+                endOfString = buffer_g[stringCounter-1] == carriageReturnSymbol 
+                                && 
+                              buffer_g[stringCounter]   == lineFeedSymbol;
+                if(endOfString) 
+                {
+                    bufferLenght_g = stringCounter;
+                    inProgress = false;
+                } 
+                startBit = false;
+                stringCounter++;                     // Next symbol please
+            }     
+        }
     }
     else
     {
@@ -133,6 +168,7 @@ void PutBit(short bit)
         }
     }
 }
+
 
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 { 

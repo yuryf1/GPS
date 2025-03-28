@@ -17,7 +17,7 @@ uartPort_e;
 
 
 typedef struct {
-    const unsigned short length; 
+    const short length; 
     const char* pointer;     
 }
 str_t;

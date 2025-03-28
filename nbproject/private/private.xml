@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Hardware/GPStest/GPSold/software_uart.c</file>
-            <file>file:/D:/Hardware/GPStest/GPSold/main.c</file>
-            <file>file:/D:/Hardware/GPStest/GPSold/timer.c</file>
-            <file>file:/D:/Hardware/GPStest/GPSold/timer.h</file>
-            <file>file:/D:/Hardware/GPStest/GPSold/software_uart.h</file>
+            <file>file:/D:/Hardware/GPS/timer.h</file>
+            <file>file:/D:/Hardware/GPS/main.c</file>
+            <file>file:/D:/Hardware/GPS/software_uart.c</file>
+            <file>file:/D:/Hardware/GPS/software_uart.h</file>
+            <file>file:/D:/Hardware/GPS/timer.c</file>
         </group>
     </open-files>
 </project-private>
