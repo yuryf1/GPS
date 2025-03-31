@@ -1,6 +1,6 @@
 #include "timer.h"
 #include <stddef.h>
-#include <stdbool.h>
+
 
 //for 4800 baudrate , period is 625 and 1:8 prescaler or period is 5000 and 1:1 prescaler
 
@@ -12,11 +12,23 @@ timer_prescaler_t prescalers[] =
             {256, 0b11}  //11 = 1:256
         };
 
-void (*Timer1Action)(short);
+bool (*Timer1Action)(short);
+bool * timer1Running;
 short * timer1Object;
 //void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 //{
-//    Timer1Action(timer1Object);
+//    timer1Running = Timer1Action(timer1Object);
+//    
+//    if(timer1Running)
+//    {
+//        //Nothing
+//    }
+//    else
+//    {
+//        //Timer1_Disable();
+//        Timer1_Interrupt_Disable();
+//    }
+//    
 //    Timer1_InterruptFlag_Clear(); 
 //}
 
@@ -25,7 +37,8 @@ void    __Timer1_Stop(void)  { Timer1_Disable();}
 
 timer_t __Timer1_Init(size_t period, 
                       unsigned short prescaler, 
-                      void (*Action)(short),
+                      bool (*Action)(short),
+                      bool * isRunning,
                       short * object)
 { 
     Timer1_ExternalClock_Disable();
@@ -38,6 +51,7 @@ timer_t __Timer1_Init(size_t period,
     Timer1_Interrupt_Enable();
     
     Timer1Action = Action;
+    timer1Running = isRunning;
     timer1Object = object;
     
     timer_t client = {&__Timer1_Start, &__Timer1_Stop};
@@ -45,7 +59,8 @@ timer_t __Timer1_Init(size_t period,
 }
 
 
-void (*Timer2Action)(short);
+bool (*Timer2Action)(short);
+bool * timer2Running;
 short * timer2Object;
 void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
 {
@@ -58,7 +73,8 @@ void    __Timer2_Stop(void)  { Timer2_Disable();}
 
 timer_t __Timer2_Init(size_t period, 
                       unsigned short prescaler, 
-                      void (*Action)(short),
+                      bool (*Action)(short),
+                      bool * isRunning,
                       short * object)
 {
     Timer2_ExternalClock_Disable();
@@ -70,8 +86,9 @@ timer_t __Timer2_Init(size_t period,
     Timer2_InterruptFlag_Clear();
     Timer2_Interrupt_Enable();
     
-    Timer1Action = Action;
-    timer1Object = object;
+    Timer1Action  = Action;
+    timer2Running = isRunning;
+    timer1Object  = object;
     
     timer_t client = {&__Timer2_Start, &__Timer2_Stop};
     return client;
@@ -136,7 +153,8 @@ timer_prescaler_t __ChosePrescaler(const unsigned long long fcy,
 timer_t Timer(const timers_e number,
               const size_t baudrate,
               const unsigned long long fcy,
-              void (*Action)(short),
+              bool (*Action)(short),
+              bool * isRunning,
               short * object)
 {
     timer_prescaler_t prescaler = __ChosePrescaler(fcy, baudrate, prescalers, 
@@ -147,11 +165,11 @@ timer_t Timer(const timers_e number,
     switch(number)
     {
         case timer1: 
-             timer = __Timer1_Init(pr, prescaler.bitsValue, Action, object);
+             timer = __Timer1_Init(pr, prescaler.bitsValue, Action, isRunning, object);
         break;   
         
         case timer2: 
-             timer = __Timer2_Init(pr, prescaler.bitsValue, Action, object);
+             timer = __Timer2_Init(pr, prescaler.bitsValue, Action, isRunning, object);
         break; 
         
         default:

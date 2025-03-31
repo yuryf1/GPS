@@ -2,6 +2,7 @@
 #define	TIMER_H
 
 #include "timer_methods.h"
+#include <stdbool.h>
 
 typedef enum {
     timer1 = 1, 
@@ -20,7 +21,8 @@ typedef struct
 timer_t Timer(const timers_e number,
               const size_t baudrate,
               const unsigned long long fcy,
-              void (*Action)(short),
+              bool (*Action)(short),
+              bool * isRunning,
               short * object);
 
 
