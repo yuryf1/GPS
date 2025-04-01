@@ -22,7 +22,7 @@ int main(void) {
        
     PIN_INIT_OUTPUT(3);
     PIN_TURN_HIGH(3);
-    __delay_ms(25000);
+    __delay_ms(5000);
     PIN_TURN_LOW(3);
         
     software_uart_t gps = Software_UART_Initialize(uart1, 1233, 45657);

@@ -8,7 +8,6 @@
 #include <string.h>   
 
 
-bool * inProgress;
 char response[BUFFERLENGTH];
 short bufferLenght_g;
 char * buffer_g;
@@ -31,8 +30,6 @@ software_uart_t Software_UART_Initialize(uartPort_e           port,
 {
     SOFTWARE_UART1_INIT;
     buffer_g = (char*)calloc(sizeof(char), BUFFERLENGTH);
-    inProgress = (bool*)calloc(sizeof(bool), 1);
-    inProgress = true;
     
     T1CONbits.TON = 0; // Disable Timer
     T1CONbits.TCS = 0; // Select internal instruction cycle clock
@@ -50,71 +47,8 @@ software_uart_t Software_UART_Initialize(uartPort_e           port,
 }
 
 
-
-
-
-
-//#define BYTE_LENGHT       8
-//#define LINE_FEED         0xa // \n
-//#define CARRIAGE_RETURN   0xd // \r
-//
-//void PutBit(short bit)
-//{
-//    static short stringCounter         = 0;
-//    static short byteCounter           = 0;
-//    static bool startBit               = false;
-//    static bool stopBit                = false;
-//    static bool previosBitIsHigh       = false;
-//    static bool endOfString            = false;
-//    
-//    //templorary, trying to create best algorithm
-//    static bool dataBit                = false;
-//
-//    if (startBit)
-//    {
-//        buffer_g[stringCounter] |= (bit << byteCounter);
-//        
-//        dataBit = byteCounter < BYTE_LENGHT;
-//        byteCounter = dataBit? (byteCounter + 1) : (0);
-//        stopBit = (bit == 1 && !dataBit)? true : false;
-//        
-//        if(stopBit)                             
-//        {
-//            endOfString = buffer_g[stringCounter-1] == CARRIAGE_RETURN 
-//                             && 
-//                          buffer_g[stringCounter]   == LINE_FEED;
-//                
-//            if(endOfString) 
-//            {
-//                bufferLenght_g = stringCounter;
-//                inProgress = false;
-//            }
-//                
-//            startBit = false;
-//            stringCounter++;                     // Next symbol please
-//        }     
-//    }
-//    else
-//    {
-//        if(bit == 0)
-//        {
-//            startBit = previosBitIsHigh? true : false;
-//            previosBitIsHigh = false;    //Clear flag
-//                     
-//        }
-//        else
-//        {
-//            previosBitIsHigh = true;  
-//        }
-//    }
-//}
-
-
-
-
-
-
-void PutBit(short bit)
+//Change to generic pointer against 'short bit'
+bool StringIsComming(short bit)
 {
     static const short byteLenght            = 8;
     static const char lineFeedSymbol         = 0xa;
@@ -123,10 +57,11 @@ void PutBit(short bit)
     static short stringCounter               = 0;
     static short byteCounter                 = 0;
     static bool startBit                     = false;
-    static bool stopBit                      = false;
-    static bool previosBitIsHigh             = false;
-    static bool endOfString                  = false;
     static bool dataBit                      = false;
+    static bool stopBit                      = false;
+    static bool endOfString                  = false;
+    static bool previosBitIsHigh             = false;
+
     
     if (startBit)
     {
@@ -138,7 +73,7 @@ void PutBit(short bit)
         else
         {
             byteCounter = 0;
-            stopBit = (bit == 1 && !dataBit)? true : false;
+            stopBit = (bit == 1)? true : false;
             if(stopBit)                             
             {
                 endOfString = buffer_g[stringCounter-1] == carriageReturnSymbol 
@@ -147,7 +82,7 @@ void PutBit(short bit)
                 if(endOfString) 
                 {
                     bufferLenght_g = stringCounter;
-                    inProgress = false;
+                    return false;
                 } 
                 startBit = false;
                 stringCounter++;                     // Next symbol please
@@ -159,7 +94,7 @@ void PutBit(short bit)
         if(bit == 0)
         {
             startBit = previosBitIsHigh? true : false;
-            previosBitIsHigh = false;    //Clear flag
+            previosBitIsHigh = false;                //Clear flag
                      
         }
         else
@@ -167,24 +102,28 @@ void PutBit(short bit)
             previosBitIsHigh = true;  
         }
     }
+    
+    return true;
 }
 
 
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 { 
-    if(inProgress)
+
+    if(StringIsComming(SOFTWARE_UART1_READ))
     {
-        PutBit(SOFTWARE_UART1_READ);
+
     }
     else
     {
-        strncpy(response, buffer_g, bufferLenght_g);
+        str_t uartString = {bufferLenght_g, buffer_g};
+        strncpy(response, uartString.pointer, uartString.length);
         Nop();
         Nop();
         Nop();
         Nop();
         
-        T1CONbits.TON = 0;
+        //T1CONbits.TON = 0;
         IEC0bits.T1IE = 0;
     }
     
