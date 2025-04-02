@@ -12,9 +12,9 @@ timer_prescaler_t prescalers[] =
             {256, 0b11}  //11 = 1:256
         };
 
-bool (*Timer1Action)(short);
+bool (*Timer1Action)(void*);
 bool * timer1Running;
-short * timer1Object;
+void * timer1Object;
 //void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 //{
 //    timer1Running = Timer1Action(timer1Object);
@@ -37,9 +37,9 @@ void    __Timer1_Stop(void)  { Timer1_Disable();}
 
 timer_t __Timer1_Init(size_t period, 
                       unsigned short prescaler, 
-                      bool (*Action)(short),
+                      bool (*Action)(void*),
                       bool * isRunning,
-                      short * object)
+                      void * object)
 { 
     Timer1_ExternalClock_Disable();
     Timer1_MeasureMode_Disable();
@@ -59,9 +59,9 @@ timer_t __Timer1_Init(size_t period,
 }
 
 
-bool (*Timer2Action)(short);
+bool (*Timer2Action)(void*);
 bool * timer2Running;
-short * timer2Object;
+void * timer2Object;
 void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
 {
     Timer2Action(timer2Object);
@@ -73,9 +73,9 @@ void    __Timer2_Stop(void)  { Timer2_Disable();}
 
 timer_t __Timer2_Init(size_t period, 
                       unsigned short prescaler, 
-                      bool (*Action)(short),
+                      bool (*Action)(void*),
                       bool * isRunning,
-                      short * object)
+                      void * object)
 {
     Timer2_ExternalClock_Disable();
     Timer2_MeasureMode_Disable();
@@ -153,9 +153,9 @@ timer_prescaler_t __ChosePrescaler(const unsigned long long fcy,
 timer_t Timer(const timers_e number,
               const size_t baudrate,
               const unsigned long long fcy,
-              bool (*Action)(short),
+              bool (*Action)(void*),
               bool * isRunning,
-              short * object)
+              void * object)
 {
     timer_prescaler_t prescaler = __ChosePrescaler(fcy, baudrate, prescalers, 
                                   sizeof(prescalers) / sizeof(prescalers[0]));

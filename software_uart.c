@@ -13,16 +13,6 @@ short bufferLenght_g;
 char * buffer_g;
 
 
-//str_t Recieve(void)
-//{
-//    str_t message = {bufferLenght_g, buffer_g};
-//    return message;
-//}
-
-void Clear()
-{
-    
-}
 
 software_uart_t Software_UART_Initialize(uartPort_e           port,
                                          unsigned long        baudRate,
@@ -46,10 +36,13 @@ software_uart_t Software_UART_Initialize(uartPort_e           port,
     return client;
 }
 
-
-//Change to generic pointer against 'short bit'
-bool StringIsComming(short bit)
+#define INPUT
+#define OUTPUT
+bool StringIsComming(void * outputString)
 {
+    INPUT  short bit                         = SOFTWARE_UART1_READ;
+    OUTPUT char * buffer                     = outputString;
+    
     static const short byteLenght            = 8;
     static const char lineFeedSymbol         = 0xa;
     static const char carriageReturnSymbol   = 0xd;
@@ -61,14 +54,14 @@ bool StringIsComming(short bit)
     static bool stopBit                      = false;
     static bool endOfString                  = false;
     static bool previosBitIsHigh             = false;
-
+    
     
     if (startBit)
     {
         dataBit = byteCounter < byteLenght;
         if(dataBit)
         {
-            buffer_g[stringCounter] |= (bit << byteCounter++);
+            buffer[stringCounter] |= (bit << byteCounter++);
         }
         else
         {
@@ -76,9 +69,9 @@ bool StringIsComming(short bit)
             stopBit = (bit == 1)? true : false;
             if(stopBit)                             
             {
-                endOfString = buffer_g[stringCounter-1] == carriageReturnSymbol 
+                endOfString = buffer[stringCounter-1] == carriageReturnSymbol 
                                 && 
-                              buffer_g[stringCounter]   == lineFeedSymbol;
+                              buffer[stringCounter]   == lineFeedSymbol;
                 if(endOfString) 
                 {
                     bufferLenght_g = stringCounter;
@@ -109,15 +102,14 @@ bool StringIsComming(short bit)
 
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 { 
-
-    if(StringIsComming(SOFTWARE_UART1_READ))
+    if(StringIsComming(buffer_g))
     {
 
     }
     else
     {
-        str_t uartString = {bufferLenght_g, buffer_g};
-        strncpy(response, uartString.pointer, uartString.length);
+        //str_t uartString = {bufferLenght_g, buffer_g};
+        strncpy(response, buffer_g, bufferLenght_g);
         Nop();
         Nop();
         Nop();

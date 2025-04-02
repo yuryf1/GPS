@@ -4,6 +4,9 @@
 #include "timer_methods.h"
 #include <stdbool.h>
 
+//Temporary for SOFTWARE_UART1_READ dependency ?
+//#include "pins.h"
+
 typedef enum {
     timer1 = 1, 
     timer2 = 2, 
@@ -21,9 +24,9 @@ typedef struct
 timer_t Timer(const timers_e number,
               const size_t baudrate,
               const unsigned long long fcy,
-              bool (*Action)(short),
+              bool (*Action)(void*),
               bool * isRunning,
-              short * object);
+              void * object);
 
 
 
