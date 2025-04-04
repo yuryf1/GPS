@@ -18,17 +18,6 @@ void * timer1Object;
 //void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 //{
 //    timer1Running = Timer1Action(timer1Object);
-//    
-//    if(timer1Running)
-//    {
-//        //Nothing
-//    }
-//    else
-//    {
-//        //Timer1_Disable();
-//        Timer1_Interrupt_Disable();
-//    }
-//    
 //    Timer1_InterruptFlag_Clear(); 
 //}
 
@@ -62,11 +51,11 @@ timer_t __Timer1_Init(size_t period,
 bool (*Timer2Action)(void*);
 bool * timer2Running;
 void * timer2Object;
-void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
-{
-    Timer2Action(timer2Object);
-    Timer2_InterruptFlag_Clear(); 
-}
+//void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
+//{
+//    timer2Running = Timer2Action(timer2Object);
+//    Timer2_InterruptFlag_Clear(); 
+//}
 
 void    __Timer2_Start(void) { Timer2_Enable(); }
 void    __Timer2_Stop(void)  { Timer2_Disable();}

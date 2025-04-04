@@ -8,14 +8,21 @@
 #include <string.h>   
 
 
-char response_g;
-bool readyToNext_g;
+char currentSymbol_g;
+
+char data_g[3];
+short dataLenght_g;
+bool running_g;
+
 
 software_uart_t Software_UART_Initialize(uartPort_e           port,
                                          unsigned long        baudRate,
                                          unsigned long long   fcy)
 {
     SOFTWARE_UART1_INIT;
+    
+    //data_g = (char*)calloc(sizeof(char), BUFFERLENGTH); 
+    dataLenght_g = 0;
     
     T1CONbits.TON = 0; // Disable Timer
     T1CONbits.TCS = 0; // Select internal instruction cycle clock
@@ -28,17 +35,31 @@ software_uart_t Software_UART_Initialize(uartPort_e           port,
     IEC0bits.T1IE = 1; // Enable Timer1 interrupt
     T1CONbits.TON = 1; // Start Timer
     
-    while(!readyToNext_g) {};
-    T1CONbits.TON = 0; // Stop Timer;
+    running_g = true;
+    while(running_g) {};
+    IEC0bits.T1IE = 0; // Disable Timer1 interrupt
+    T1CONbits.TON = 0; // Stop Timer
+    //TMR1 = 0x00;
+    data_g[dataLenght_g++] = currentSymbol_g;
+    
+    IEC0bits.T1IE = 1; // Timer1 interrupt
+    T1CONbits.TON = 1; //Timer
+    running_g = true;
+    while(running_g) {};
+    IEC0bits.T1IE = 0; // Disable Timer1 interrupt
+    T1CONbits.TON = 0; // Stop Timer
+    //TMR1 = 0x00;
+    data_g[dataLenght_g++] = currentSymbol_g;
+    
     Nop();
     Nop();
     Nop();
     Nop();
     
+    
     software_uart_t client;
     return client;
 }
-
 
 
 #define INPUT
@@ -66,6 +87,8 @@ bool SymbolIsComming(void * outputCharacter)
             stopBit = (bit == 1)? true : false;
             if(stopBit)                             
             {
+                byteCounter            = 0;
+                startBit               = false;
                 return false;
             }     
         }
@@ -88,10 +111,11 @@ bool SymbolIsComming(void * outputCharacter)
 }
 
 
+
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
-{ 
-    readyToNext_g = !SymbolIsComming(&response_g);
-            
+{
+    running_g = SymbolIsComming(&currentSymbol_g);
+
     IFS0bits.T1IF = 0;//Flag
 }
 
