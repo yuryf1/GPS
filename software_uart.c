@@ -1,65 +1,13 @@
 #include "software_uart.h"
 
+#include "configuration.h"
+#include "timer.h"
 //Temporary
-#include <xc.h>
+//#include <xc.h>
 
 #include <stdbool.h>            // true/false
 #include <stdlib.h>             // calloc
 #include <string.h>   
-
-
-char currentSymbol_g;
-
-char data_g[3];
-short dataLenght_g;
-bool running_g;
-
-
-software_uart_t Software_UART_Initialize(uartPort_e           port,
-                                         unsigned long        baudRate,
-                                         unsigned long long   fcy)
-{
-    SOFTWARE_UART1_INIT;
-    
-    //data_g = (char*)calloc(sizeof(char), BUFFERLENGTH); 
-    dataLenght_g = 0;
-    
-    T1CONbits.TON = 0; // Disable Timer
-    T1CONbits.TCS = 0; // Select internal instruction cycle clock
-    T1CONbits.TGATE = 0; // Disable Gated Timer mode
-    T1CONbits.TCKPS = 0b00; ///0b01;// Select 1:1 Prescaler
-    TMR1 = 0x00; // Clear timer register
-    PR1 = 5000; //625;// Load the period value
-    IPC0bits.T1IP = 0x01; // Set Timer1 Interrupt Priority Level
-    IFS0bits.T1IF = 0; // Clear Timer1 Interrupt Flag
-    IEC0bits.T1IE = 1; // Enable Timer1 interrupt
-    T1CONbits.TON = 1; // Start Timer
-    
-    running_g = true;
-    while(running_g) {};
-    IEC0bits.T1IE = 0; // Disable Timer1 interrupt
-    T1CONbits.TON = 0; // Stop Timer
-    //TMR1 = 0x00;
-    data_g[dataLenght_g++] = currentSymbol_g;
-    
-    IEC0bits.T1IE = 1; // Timer1 interrupt
-    T1CONbits.TON = 1; //Timer
-    running_g = true;
-    while(running_g) {};
-    IEC0bits.T1IE = 0; // Disable Timer1 interrupt
-    T1CONbits.TON = 0; // Stop Timer
-    //TMR1 = 0x00;
-    data_g[dataLenght_g++] = currentSymbol_g;
-    
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    
-    
-    software_uart_t client;
-    return client;
-}
 
 
 #define INPUT
@@ -89,6 +37,7 @@ bool SymbolIsComming(void * outputCharacter)
             {
                 byteCounter            = 0;
                 startBit               = false;
+                stopBit                = false;
                 return false;
             }     
         }
@@ -112,12 +61,72 @@ bool SymbolIsComming(void * outputCharacter)
 
 
 
-void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
+    char currentSymbol_g;
+    char data_g[BUFFERLENGTH];
+    short dataLenght_g =0;
+    bool running_g = false;
+software_uart_t Software_UART_Initialize(uartPort_e           port,
+                                         unsigned long        baudRate,
+                                         unsigned long long   fcy)
 {
-    running_g = SymbolIsComming(&currentSymbol_g);
+    SOFTWARE_UART1_INIT;
+    
 
-    IFS0bits.T1IF = 0;//Flag
+    timer_t timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g);
+    
+        
+        running_g = true;
+        timer.Start();
+        while(running_g) {};
+        timer.Stop();
+        data_g[dataLenght_g++] = currentSymbol_g;
+
+        
+        running_g = true;
+        timer.Start();
+        while(running_g) {};
+        timer.Stop();
+        data_g[dataLenght_g++] = currentSymbol_g;
+        
+
+        running_g = true;
+        timer.Start();
+        while(running_g) {};
+        timer.Stop();
+        data_g[dataLenght_g++] = currentSymbol_g;
+        
+
+        running_g = true;
+        timer.Start();
+        while(running_g) {};
+        timer.Stop();
+        data_g[dataLenght_g++] = currentSymbol_g;
+        
+        
+        running_g = true;
+        timer.Start();
+        while(running_g) {};
+        timer.Stop();
+        data_g[dataLenght_g++] = currentSymbol_g;
+
+    
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    
+    
+    software_uart_t client;
+    return client;
 }
+
+
+//void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
+//{
+//    running_g = SymbolIsComming(&currentSymbol_g);
+//
+//    IFS0bits.T1IF = 0;//Flag
+//}
 
 
 

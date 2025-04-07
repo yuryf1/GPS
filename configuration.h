@@ -7,6 +7,5 @@
 
 
 
-
 #endif	/* PROPERTIES_H */
 

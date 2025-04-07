@@ -7,11 +7,13 @@
 #define SOFTWARE_UART2_INIT  
 #define SOFTWARE_UART2_READ  
 
+//Allocated bytes in a heap for every recieved message
+#define BUFFERLENGTH 128    
 
 typedef enum {
     uart1 = 1, 
-    uart2 = 2, 
-    invalidFirst = 0, first = uart1, last = uart2
+    uart2 = 2
+    //, invalidFirst = 0, first = uart1, last = uart2
 } 
 uartPort_e;
 
@@ -36,8 +38,7 @@ software_uart_t Software_UART_Initialize(uartPort_e port,
                                 unsigned long long fcy);
 
 
-//Allocated bytes in a heap for every recieved message
-#define BUFFERLENGTH 128    
+
 
 
 
