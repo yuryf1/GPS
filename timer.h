@@ -4,8 +4,6 @@
 #include "timer_methods.h"
 #include <stdbool.h>
 
-//Temporary for SOFTWARE_UART1_READ dependency ?
-//#include "pins.h"
 
 typedef enum {
     timer1 = 1, 

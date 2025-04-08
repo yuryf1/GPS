@@ -28,20 +28,14 @@ str_t;
 typedef struct {
   //void     (*Send)    (char*);
   str_t    (*Recieve) (void);
-  void     (*Clear)   (str_t);  
+  void     (*Clear)   (str_t*);  
 } 
 software_uart_t;
 
 
-software_uart_t Software_UART_Initialize(uartPort_e port,
-                                unsigned long baudRate, 
-                                unsigned long long fcy);
-
-
-
-
-
-
+software_uart_t Software_UART(uartPort_e port,
+                              unsigned long baudRate, 
+                              unsigned long long fcy);
 
 
 #endif

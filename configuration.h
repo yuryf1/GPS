@@ -5,7 +5,7 @@
 #define FOSC              48000000ULL      // x8 and x6 PLL devides work good
 #define FCY               FOSC/2           // device instruction clock for delay_ms()
 
-
+#define GPS_BAUDRATE      4800
 
 #endif	/* PROPERTIES_H */
 

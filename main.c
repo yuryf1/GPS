@@ -10,11 +10,8 @@
 #include "software_uart.h"
 
 
-//Temporary
-#include <xc.h>
-
 int main(void) {
-    
+   
     EnablePLL(FINPUT,FOSC);
     EnablePerepherealPower();
     EnableModuleGPS();
@@ -22,14 +19,26 @@ int main(void) {
        
     PIN_INIT_OUTPUT(3);
     PIN_TURN_HIGH(3);
-    __delay_ms(5000);
+    __delay_ms(7000);
     PIN_TURN_LOW(3);
         
-    software_uart_t gps = Software_UART_Initialize(uart1, 1233, 45657);
-    //str_t gpsString = gps.Recieve();
+    software_uart_t gps = Software_UART(uart1, GPS_BAUDRATE, FCY);
+    str_t gpsString = gps.Recieve();
+    char response[BUFFERLENGTH];
+    strncpy(response, gpsString.pointer, gpsString.length);
+    gps.Clear(&gpsString);
 
     
-      
+    str_t gpsString2 = gps.Recieve();
+    char response2[BUFFERLENGTH];
+    strncpy(response2, gpsString2.pointer, gpsString2.length);
+    gps.Clear(&gpsString);
+    
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+
     while(true)
     {
         //Nop();

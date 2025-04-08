@@ -1,13 +1,9 @@
 #include "software_uart.h"
 
-#include "configuration.h"
 #include "timer.h"
-//Temporary
-//#include <xc.h>
 
 #include <stdbool.h>            // true/false
 #include <stdlib.h>             // calloc
-#include <string.h>   
 
 
 #define INPUT
@@ -63,88 +59,74 @@ bool SymbolIsComming(void * outputCharacter)
 }
 
 
+timer_t softwareUART1_Timer_g;
+bool    softwareUART1_Running_g;
+char    softwareUART1_CurrentSymbol_g; 
 
-//char currentSymbol_g1 = 0;
-//char currentSymbol_g2 = 0;
-//char currentSymbol_g3 = 0;
-//char currentSymbol_g4 = 0;
-//char currentSymbol_g5 = 0;
-
-char currentSymbol_g  = 0;
-char data[BUFFERLENGTH];
-short dataCounter     = 0;
-bool running_g;
-software_uart_t Software_UART_Initialize(uartPort_e           port,
-                                         unsigned long        baudRate,
-                                         unsigned long long   fcy)
+str_t __Software_UART1_Recieve(void)
 {
-    SOFTWARE_UART1_INIT;
-
-    running_g = false;
+    static const char lineFeedSymbol               = 0xa;
+    static const char carriageReturnSymbol         = 0xd;
     
-    timer_t timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g);
+    char * message = (char*)calloc(sizeof(char), BUFFERLENGTH);
+    short messageCounter                           = 0;
+     
+    bool endOfString                               = false;
     
-          running_g = true;
-    timer.Start(); 
-          while(running_g) {};
-    timer.Stop();
-    data[dataCounter++] = currentSymbol_g; 
-    currentSymbol_g = 0;
+    while(!endOfString)
+    {
+        softwareUART1_Running_g = true;     
+        softwareUART1_Timer_g.Start(); 
+        while(softwareUART1_Running_g) {};  
+        softwareUART1_Timer_g.Stop();
+        
+        message[messageCounter++] = softwareUART1_CurrentSymbol_g; 
+        endOfString = softwareUART1_CurrentSymbol_g == lineFeedSymbol;
+        softwareUART1_CurrentSymbol_g = 0;     
+    }
     
-              running_g = true;
-    timer.Start(); 
-          while(running_g) {};
-    timer.Stop();
-    data[dataCounter++] = currentSymbol_g; 
-    currentSymbol_g = 0;
-    
-              running_g = true;
-    timer.Start(); 
-          while(running_g) {};
-    timer.Stop();
-    data[dataCounter++] = currentSymbol_g; 
-    currentSymbol_g = 0;
-    
-              running_g = true;
-    timer.Start(); 
-          while(running_g) {};
-    timer.Stop();
-    data[dataCounter++] = currentSymbol_g; 
-    currentSymbol_g = 0;
-    
-    
-//    timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g2);
-//          running_g = true;
-//    timer.Start(); 
-//          while(running_g) {};
-//    timer.Stop();
-//    
-//    timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g3);
-//          running_g = true;
-//    timer.Start(); 
-//          while(running_g) {};
-//    timer.Stop();
-//    
-//    timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g4);
-//          running_g = true;
-//    timer.Start(); 
-//          while(running_g) {};
-//    timer.Stop();
-//    
-//    timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g5);
-//          running_g = true;
-//    timer.Start(); 
-//          while(running_g) {};
-//    timer.Stop();
- 
-    Nop();
-    Nop();
-    Nop();
-    
-    
-    software_uart_t client;
+    str_t client = {messageCounter, message};
     return client;
 }
+
+void __Software_UART_Clear(str_t* str)
+{
+   if(str)
+   {
+       if(str->pointer)
+       {
+           free(str->pointer);
+           str->pointer = NULL;
+       }
+   }
+}
+
+software_uart_t Software_UART(uartPort_e           port,
+                              unsigned long        baudRate,
+                              unsigned long long   fcy)
+{
+    SOFTWARE_UART1_INIT;
+    
+    //GO TO port to timer switch
+    softwareUART1_Timer_g = Timer(timer1, baudRate, fcy, 
+                                 SymbolIsComming, 
+                                 &softwareUART1_Running_g, 
+                                 &softwareUART1_CurrentSymbol_g);
+     
+    software_uart_t client = {__Software_UART1_Recieve, __Software_UART_Clear};
+    return client;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 //void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
@@ -153,8 +135,6 @@ software_uart_t Software_UART_Initialize(uartPort_e           port,
 //
 //    IFS0bits.T1IF = 0;//Flag
 //}
-
-
 
 
 //

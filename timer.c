@@ -1,5 +1,5 @@
 #include "timer.h"
-#include <stddef.h>
+#include <stddef.h>                 //size_t
 
 
 //for 4800 baudrate , period is 625 and 1:8 prescaler or period is 5000 and 1:1 prescaler
@@ -33,8 +33,7 @@ timer_t __Timer1_Init(size_t period,
     Timer1_MeasureMode_Disable();
     Timer1_Prescaler_Set(prescaler);
     Timer1_MeasureMode_Counter_Set(0); 
-    Timer1_Period_Set(period); 
-    //Timer1_Period_Set(5000); 
+    Timer1_Period_Set(period);  
     Timer1_PriorityFrom0to7_Set(1); 
     Timer1_InterruptFlag_Clear();
     Timer1_Interrupt_Enable();
