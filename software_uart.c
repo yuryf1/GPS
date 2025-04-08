@@ -21,25 +21,28 @@ bool SymbolIsComming(void * outputCharacter)
 
     static short byteCounter                 = 0;
     static bool startBit                     = false;
+    static bool dataBit                      = false;
     static bool stopBit                      = false;
     static bool previosBitIsHigh             = false;
     
     if (startBit)
     {
-        if(byteCounter < byteLenght)
+        dataBit = byteCounter < byteLenght;
+        if(dataBit)
         {
             *symbol |= (bit << byteCounter++);
         }
         else
-        {
+        { 
+            byteCounter                      = 0;  
+            startBit                         = false;
+            previosBitIsHigh                 = false; 
+            
             stopBit = (bit == 1)? true : false;
             if(stopBit)                             
             {
-                byteCounter            = 0;
-                startBit               = false;
-                stopBit                = false;
                 return false;
-            }     
+            }
         }
     }
     else
@@ -61,56 +64,79 @@ bool SymbolIsComming(void * outputCharacter)
 
 
 
-    char currentSymbol_g;
-    char data_g[BUFFERLENGTH];
-    short dataLenght_g =0;
-    bool running_g = false;
+//char currentSymbol_g1 = 0;
+//char currentSymbol_g2 = 0;
+//char currentSymbol_g3 = 0;
+//char currentSymbol_g4 = 0;
+//char currentSymbol_g5 = 0;
+
+char currentSymbol_g  = 0;
+char data[BUFFERLENGTH];
+short dataCounter     = 0;
+bool running_g;
 software_uart_t Software_UART_Initialize(uartPort_e           port,
                                          unsigned long        baudRate,
                                          unsigned long long   fcy)
 {
     SOFTWARE_UART1_INIT;
-    
 
+    running_g = false;
+    
     timer_t timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g);
     
-        
-        running_g = true;
-        timer.Start();
-        while(running_g) {};
-        timer.Stop();
-        data_g[dataLenght_g++] = currentSymbol_g;
-
-        
-        running_g = true;
-        timer.Start();
-        while(running_g) {};
-        timer.Stop();
-        data_g[dataLenght_g++] = currentSymbol_g;
-        
-
-        running_g = true;
-        timer.Start();
-        while(running_g) {};
-        timer.Stop();
-        data_g[dataLenght_g++] = currentSymbol_g;
-        
-
-        running_g = true;
-        timer.Start();
-        while(running_g) {};
-        timer.Stop();
-        data_g[dataLenght_g++] = currentSymbol_g;
-        
-        
-        running_g = true;
-        timer.Start();
-        while(running_g) {};
-        timer.Stop();
-        data_g[dataLenght_g++] = currentSymbol_g;
-
+          running_g = true;
+    timer.Start(); 
+          while(running_g) {};
+    timer.Stop();
+    data[dataCounter++] = currentSymbol_g; 
+    currentSymbol_g = 0;
     
-    Nop();
+              running_g = true;
+    timer.Start(); 
+          while(running_g) {};
+    timer.Stop();
+    data[dataCounter++] = currentSymbol_g; 
+    currentSymbol_g = 0;
+    
+              running_g = true;
+    timer.Start(); 
+          while(running_g) {};
+    timer.Stop();
+    data[dataCounter++] = currentSymbol_g; 
+    currentSymbol_g = 0;
+    
+              running_g = true;
+    timer.Start(); 
+          while(running_g) {};
+    timer.Stop();
+    data[dataCounter++] = currentSymbol_g; 
+    currentSymbol_g = 0;
+    
+    
+//    timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g2);
+//          running_g = true;
+//    timer.Start(); 
+//          while(running_g) {};
+//    timer.Stop();
+//    
+//    timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g3);
+//          running_g = true;
+//    timer.Start(); 
+//          while(running_g) {};
+//    timer.Stop();
+//    
+//    timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g4);
+//          running_g = true;
+//    timer.Start(); 
+//          while(running_g) {};
+//    timer.Stop();
+//    
+//    timer = Timer(timer1, 4800, FCY, SymbolIsComming, &running_g, &currentSymbol_g5);
+//          running_g = true;
+//    timer.Start(); 
+//          while(running_g) {};
+//    timer.Stop();
+ 
     Nop();
     Nop();
     Nop();

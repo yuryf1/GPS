@@ -21,9 +21,8 @@ void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
     Timer1_InterruptFlag_Clear(); 
 }
 
-void    __Timer1_Start(void) { Timer1_Enable(); }
+void    __Timer1_Start(void) { Timer1_Enable();}
 void    __Timer1_Stop(void)  { Timer1_Disable();}
-
 timer_t __Timer1_Init(size_t period, 
                       unsigned short prescaler, 
                       bool (*Action)(void*),
@@ -35,6 +34,7 @@ timer_t __Timer1_Init(size_t period,
     Timer1_Prescaler_Set(prescaler);
     Timer1_MeasureMode_Counter_Set(0); 
     Timer1_Period_Set(period); 
+    //Timer1_Period_Set(5000); 
     Timer1_PriorityFrom0to7_Set(1); 
     Timer1_InterruptFlag_Clear();
     Timer1_Interrupt_Enable();
@@ -42,7 +42,7 @@ timer_t __Timer1_Init(size_t period,
     Timer1Action = Action;
     timer1Running = isRunning;
     timer1Object = object;
-    
+
     timer_t client = {&__Timer1_Start, &__Timer1_Stop};
     return client;
 }
