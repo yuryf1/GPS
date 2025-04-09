@@ -6,8 +6,21 @@
 #include <stdlib.h>             // calloc
 
 
+
+//bool BitsAreComming(void * outputData)
+//{
+//    static const unsigned s maxLenght = 256;
+//    
+//    
+//    return true;
+//}
+
+
+
+
 #define INPUT
 #define OUTPUT
+//garbage symbols, fake start bits
 bool SymbolIsComming(void * outputCharacter)
 {
     INPUT  short bit                         = SOFTWARE_UART1_READ;
@@ -33,7 +46,7 @@ bool SymbolIsComming(void * outputCharacter)
             byteCounter                      = 0;  
             startBit                         = false;
             previosBitIsHigh                 = false; 
-            
+
             stopBit = (bit == 1)? true : false;
             if(stopBit)                             
             {
@@ -68,12 +81,12 @@ str_t __Software_UART1_Recieve(void)
     static const char lineFeedSymbol               = 0xa;
     static const char carriageReturnSymbol         = 0xd;
     
-    char * message = (char*)calloc(sizeof(char), BUFFERLENGTH);
-    short messageCounter                           = 0;
+    char * message = (char*)calloc(sizeof(char), MAX_STRING_LENGTH);
+    short messageCounter                  = 0;
      
     bool endOfString                               = false;
     
-    while(!endOfString)
+    while((messageCounter < MAX_STRING_LENGTH) && (!endOfString))
     {
         softwareUART1_Running_g = true;     
         softwareUART1_Timer_g.Start(); 
@@ -82,7 +95,7 @@ str_t __Software_UART1_Recieve(void)
         
         message[messageCounter++] = softwareUART1_CurrentSymbol_g; 
         endOfString = softwareUART1_CurrentSymbol_g == lineFeedSymbol;
-        softwareUART1_CurrentSymbol_g = 0;     
+        softwareUART1_CurrentSymbol_g = 0b00000000;     
     }
     
     str_t client = {messageCounter, message};

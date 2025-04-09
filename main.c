@@ -9,7 +9,13 @@
 
 #include "software_uart.h"
 
-
+char response[MAX_STRING_LENGTH];
+char response2[MAX_STRING_LENGTH];
+char response3[MAX_STRING_LENGTH];
+char response4[MAX_STRING_LENGTH];
+char response5[MAX_STRING_LENGTH];
+//#define DELAY 
+#define DELAY __delay_ms(100)
 int main(void) {
    
     EnablePLL(FINPUT,FOSC);
@@ -19,19 +25,37 @@ int main(void) {
        
     PIN_INIT_OUTPUT(3);
     PIN_TURN_HIGH(3);
-    __delay_ms(7000);
+    __delay_ms(30000);__delay_ms(30000);__delay_ms(30000);__delay_ms(30000);__delay_ms(30000);
     PIN_TURN_LOW(3);
         
     software_uart_t gps = Software_UART(uart1, GPS_BAUDRATE, FCY);
+    
     str_t gpsString = gps.Recieve();
-    char response[BUFFERLENGTH];
     strncpy(response, gpsString.pointer, gpsString.length);
     gps.Clear(&gpsString);
 
+    DELAY; 
     
     str_t gpsString2 = gps.Recieve();
-    char response2[BUFFERLENGTH];
     strncpy(response2, gpsString2.pointer, gpsString2.length);
+    gps.Clear(&gpsString);
+    
+    DELAY; 
+    
+    str_t gpsString3 = gps.Recieve();
+    strncpy(response3, gpsString3.pointer, gpsString3.length);
+    gps.Clear(&gpsString);
+    
+    DELAY; 
+    
+    str_t gpsString4 = gps.Recieve();
+    strncpy(response4, gpsString4.pointer, gpsString4.length);
+    gps.Clear(&gpsString);
+    
+    DELAY; 
+    
+    str_t gpsString5 = gps.Recieve();
+    strncpy(response5, gpsString5.pointer, gpsString5.length);
     gps.Clear(&gpsString);
     
     Nop();

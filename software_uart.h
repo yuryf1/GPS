@@ -8,7 +8,7 @@
 #define SOFTWARE_UART2_READ  
 
 //Allocated bytes in a heap for every recieved message
-#define BUFFERLENGTH 128    
+#define MAX_STRING_LENGTH 200    
 
 typedef enum {
     uart1 = 1, 
