@@ -64,5 +64,6 @@ void EnablePLL(unsigned long long freqIn, unsigned long long freqOut)
     //Migrate to other method
     __DisableWatchdog();
     
+    //ATTENTION! BLOCK FUNCTION!
     while(__IsPllReady() == false) {};      
 }

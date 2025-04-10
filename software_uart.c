@@ -6,33 +6,25 @@
 #include <stdlib.h>             // calloc
 
 
-
-//bool BitsAreComming(void * outputData)
-//{
-//    static const unsigned s maxLenght = 256;
-//    
-//    
-//    return true;
-//}
-
-
-
+short maxWaitTicks_g;           //Setup by initialization
 
 #define INPUT
 #define OUTPUT
-//garbage symbols, fake start bits
-bool SymbolIsComming(void * outputCharacter)
+bool SymbolIsComming(OUTPUT void * character)
 {
+    INPUT  short maxWaitTicks                = maxWaitTicks_g;
     INPUT  short bit                         = SOFTWARE_UART1_READ;
-    OUTPUT char * symbol                     = outputCharacter;
+    OUTPUT char * symbol                     = character;
 
     static const short byteLenght            = 8;
-
+    
     static short byteCounter                 = 0;
+    static short waitingCounter              = 0;
     static bool startBit                     = false;
     static bool dataBit                      = false;
     static bool stopBit                      = false;
-    static bool previosBitIsHigh             = false;
+    
+    bool overTime                            = false;
     
     if (startBit)
     {
@@ -43,9 +35,8 @@ bool SymbolIsComming(void * outputCharacter)
         }
         else
         { 
-            byteCounter                      = 0;  
-            startBit                         = false;
-            previosBitIsHigh                 = false; 
+            byteCounter = 0;  
+            startBit = false;
 
             stopBit = (bit == 1)? true : false;
             if(stopBit)                             
@@ -53,22 +44,25 @@ bool SymbolIsComming(void * outputCharacter)
                 return false;
             }
         }
+        
+        waitingCounter = 0;
     }
     else
     {
-        if(bit == 0)
-        {
-            startBit = previosBitIsHigh? true : false;
-            previosBitIsHigh = false;                
-                     
-        }
-        else
-        {
-            previosBitIsHigh = true;  
-        }
+        waitingCounter++;
+        startBit = (bit == 0)? true : false;
     }
     
-    return true;
+    overTime = waitingCounter > maxWaitTicks;
+    if (overTime)
+    {
+        waitingCounter = 0;
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 
@@ -81,12 +75,11 @@ str_t __Software_UART1_Recieve(void)
     static const char lineFeedSymbol               = 0xa;
     static const char carriageReturnSymbol         = 0xd;
     
-    char * message = (char*)calloc(sizeof(char), MAX_STRING_LENGTH);
-    short messageCounter                  = 0;
-     
+    char * message = (char*)calloc(sizeof(char), BUFFERLENGTH);
+    short messageCounter                           = 0;
     bool endOfString                               = false;
     
-    while((messageCounter < MAX_STRING_LENGTH) && (!endOfString))
+    while((messageCounter < BUFFERLENGTH) && (!endOfString))
     {
         softwareUART1_Running_g = true;     
         softwareUART1_Timer_g.Start(); 
@@ -119,6 +112,8 @@ software_uart_t Software_UART(uartPort_e           port,
                               unsigned long long   fcy)
 {
     SOFTWARE_UART1_INIT;
+    
+    maxWaitTicks_g = SOFTWARE_UART1_WAIT * baudRate;
     
     //GO TO port to timer switch
     softwareUART1_Timer_g = Timer(timer1, baudRate, fcy, 

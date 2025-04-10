@@ -4,11 +4,14 @@
 #include "pins.h"
 #define SOFTWARE_UART1_INIT  PIN_INIT_INPUT(55)
 #define SOFTWARE_UART1_READ  PIN_GET_BIT(55)
+#define SOFTWARE_UART1_WAIT  2                   //in seconds
 #define SOFTWARE_UART2_INIT  
 #define SOFTWARE_UART2_READ  
 
 //Allocated bytes in a heap for every recieved message
-#define MAX_STRING_LENGTH 200    
+#define BUFFERLENGTH 200  
+//Time for recieve waiting in timer steps
+#define WAITING 1000ULL 
 
 typedef enum {
     uart1 = 1, 

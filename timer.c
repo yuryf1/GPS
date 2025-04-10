@@ -21,8 +21,8 @@ void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
     Timer1_InterruptFlag_Clear(); 
 }
 
-void    __Timer1_Start(void) { Timer1_Enable();}
-void    __Timer1_Stop(void)  { Timer1_Disable();}
+void    __Timer1_Start(void) { Timer1_Enable();  }
+void    __Timer1_Stop(void)  { Timer1_Disable(); }
 timer_t __Timer1_Init(size_t period, 
                       unsigned short prescaler, 
                       bool (*Action)(void*),
@@ -114,9 +114,9 @@ size_t __CalculateError(const unsigned long long fcy,
 
 
 timer_prescaler_t __ChosePrescaler(const unsigned long long fcy, 
-                                          const size_t baudrate,
-                                          const timer_prescaler_t * prescalers,
-                                          const unsigned short prescalersLenght)
+                                   const size_t baudrate,
+                                   const timer_prescaler_t * prescalers,
+                                   const unsigned short prescalersLenght)
 {
     size_t period;
     size_t error = baudrate;
