@@ -14,8 +14,8 @@ char response2[BUFFERLENGTH];
 char response3[BUFFERLENGTH];
 char response4[BUFFERLENGTH];
 char response5[BUFFERLENGTH];
-//#define DELAY 
-#define DELAY __delay_ms(1500)
+#define DELAY 
+//#define DELAY __delay_ms(1500)
 int main(void) {
    
     EnablePLL(FINPUT,FOSC);
@@ -25,7 +25,7 @@ int main(void) {
        
     PIN_INIT_OUTPUT(3);
     PIN_TURN_HIGH(3);
-    __delay_ms(8000);
+    __delay_ms(9000);
     PIN_TURN_LOW(3);
         
     software_uart_t gps = Software_UART(uart1, GPS_BAUDRATE, FCY);

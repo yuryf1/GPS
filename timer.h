@@ -4,6 +4,8 @@
 #include "timer_methods.h"
 #include <stdbool.h>
 
+#include "configuration.h"       //advanced for TIMER_PRESCALERS
+
 
 typedef enum {
     timer1 = 1, 
@@ -19,6 +21,7 @@ typedef struct
   void  (*Stop)       (void);
 } timer_t;
 
+
 timer_t Timer(const timers_e number,
               const size_t baudrate,
               const unsigned long long fcy,
@@ -28,13 +31,17 @@ timer_t Timer(const timers_e number,
 
 
 
-//OPTIONS
-//If your devise has not prescaller leave only {1, 0b00}
+//ADVANCED OPTION (PRESCALER - frequency devide)
+//For 4800 baudrate , period is 625  and 1:8 prescaler
+//                 or period is 5000 and 1:1 prescaler
 typedef struct {
     const unsigned short scale; 
     const unsigned short bitsValue;     
 }
 timer_prescaler_t;
+
+
+
 
 
 

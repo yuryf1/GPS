@@ -6,20 +6,20 @@
 #include <stdlib.h>             // calloc
 
 
-short maxWaitTicks_g;           //Setup by initialization
+unsigned short maxWaitTicks_g;           //Setup by initialization
 
 #define INPUT
 #define OUTPUT
 bool SymbolIsComming(OUTPUT void * character)
 {
-    INPUT  short maxWaitTicks                = maxWaitTicks_g;
-    INPUT  short bit                         = SOFTWARE_UART1_READ;
+    INPUT  unsigned short maxWaitTicks       = maxWaitTicks_g;
+    INPUT  unsigned short bit                = SOFTWARE_UART1_READ;
     OUTPUT char * symbol                     = character;
 
-    static const short byteLenght            = 8;
+    static const unsigned short byteLenght   = 8;
     
-    static short byteCounter                 = 0;
-    static short waitingCounter              = 0;
+    static unsigned short byteCounter        = 0;
+    static unsigned short waitingCounter     = 0;
     static bool startBit                     = false;
     static bool dataBit                      = false;
     static bool stopBit                      = false;
@@ -76,7 +76,7 @@ str_t __Software_UART1_Recieve(void)
     static const char carriageReturnSymbol         = 0xd;
     
     char * message = (char*)calloc(sizeof(char), BUFFERLENGTH);
-    short messageCounter                           = 0;
+    unsigned short messageCounter                  = 0;
     bool endOfString                               = false;
     
     while((messageCounter < BUFFERLENGTH) && (!endOfString))

@@ -2,15 +2,14 @@
 #include <stddef.h>                 //size_t
 
 
-//for 4800 baudrate , period is 625 and 1:8 prescaler or period is 5000 and 1:1 prescaler
-
 timer_prescaler_t prescalers[] = 
 {
-            {1, 0b00},   //00 = 1:1
-            {8, 0b01},   //01 = 1:8 
-            {64, 0b10},  //10 = 1:64
-            {256, 0b11}  //11 = 1:256
-        };
+    #ifdef TIMER_PRESCALERS
+        TIMER_PRESCALERS
+    #else
+        {1,   0b00}    //00 = 1:1
+    #endif
+};
 
 bool (*Timer1Action)(void*);
 bool * timer1Running;
