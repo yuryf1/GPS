@@ -14,7 +14,7 @@ timer_prescaler_t prescalers[] =
 bool (*Timer1Action)(void*);
 bool * timer1Running;
 void * timer1Object;
-void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
+void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void)
 {
     *timer1Running = Timer1Action(timer1Object);
     Timer1_InterruptFlag_Clear(); 
@@ -49,7 +49,7 @@ timer_t __Timer1_Init(size_t period,
 bool (*Timer2Action)(void*);
 bool * timer2Running;
 void * timer2Object;
-void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
+void __attribute__((__interrupt__, auto_psv)) _T2Interrupt(void)
 {
     *timer2Running = Timer2Action(timer2Object);
     Timer2_InterruptFlag_Clear(); 

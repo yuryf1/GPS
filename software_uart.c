@@ -6,20 +6,20 @@
 #include <stdlib.h>             // calloc
 
 
-unsigned short maxWaitTicks_g;           //Setup by initialization
+unsigned long long softwareUART1_maxTicks_g;           //Setup by initialization
 
 #define INPUT
 #define OUTPUT
 bool SymbolIsComming(OUTPUT void * character)
 {
-    INPUT  unsigned short maxWaitTicks       = maxWaitTicks_g;
+    INPUT  unsigned long long maxWaitTicks   = softwareUART1_maxTicks_g;
     INPUT  unsigned short bit                = SOFTWARE_UART1_READ;
     OUTPUT char * symbol                     = character;
 
     static const unsigned short byteLenght   = 8;
     
     static unsigned short byteCounter        = 0;
-    static unsigned short waitingCounter     = 0;
+    static unsigned short waitingTicks       = 0;
     static bool startBit                     = false;
     static bool dataBit                      = false;
     static bool stopBit                      = false;
@@ -45,18 +45,18 @@ bool SymbolIsComming(OUTPUT void * character)
             }
         }
         
-        waitingCounter = 0;
+        waitingTicks = 0;
     }
     else
     {
-        waitingCounter++;
+        waitingTicks++;
         startBit = (bit == 0)? true : false;
     }
     
-    overTime = waitingCounter > maxWaitTicks;
+    overTime = waitingTicks > maxWaitTicks;
     if (overTime)
     {
-        waitingCounter = 0;
+        waitingTicks = 0;
         return false;
     }
     else
@@ -66,36 +66,7 @@ bool SymbolIsComming(OUTPUT void * character)
 }
 
 
-timer_t softwareUART1_Timer_g;
-bool    softwareUART1_Running_g;
-char    softwareUART1_CurrentSymbol_g; 
-
-str_t __Software_UART1_Recieve(void)
-{
-    static const char lineFeedSymbol               = 0xa;
-    static const char carriageReturnSymbol         = 0xd;
-    
-    char * message = (char*)calloc(sizeof(char), BUFFERLENGTH);
-    unsigned short messageCounter                  = 0;
-    bool endOfString                               = false;
-    
-    while((messageCounter < BUFFERLENGTH) && (!endOfString))
-    {
-        softwareUART1_Running_g = true;     
-        softwareUART1_Timer_g.Start(); 
-        while(softwareUART1_Running_g) {};  
-        softwareUART1_Timer_g.Stop();
-        
-        message[messageCounter++] = softwareUART1_CurrentSymbol_g; 
-        endOfString = softwareUART1_CurrentSymbol_g == lineFeedSymbol;
-        softwareUART1_CurrentSymbol_g = 0b00000000;     
-    }
-    
-    str_t client = {messageCounter, message};
-    return client;
-}
-
-void __Software_UART_Clear(str_t* str)
+void __Software_UART_Clear(str_t * str)
 {
    if(str)
    {
@@ -107,30 +78,77 @@ void __Software_UART_Clear(str_t* str)
    }
 }
 
-software_uart_t Software_UART(uartPort_e           port,
-                              unsigned long        baudRate,
-                              unsigned long long   fcy)
+
+timer_t softwareUART1_Timer_g;
+bool    softwareUART1_RunningFlag_g;
+char    softwareUART1_CurrentSymbol_g; 
+str_t   softwareUART1_CurrentString_g;
+
+str_t __Software_UART1_Recieve(void)
 {
-    SOFTWARE_UART1_INIT;
+    static const char lineFeedSymbol               = 0xa;
+    //static const char carriageReturnSymbol         = 0xd;
     
-    maxWaitTicks_g = SOFTWARE_UART1_WAIT * baudRate;
+    char * message = (char*)calloc(sizeof(char), SOFTWARE_UART1_BUFF);
+    unsigned short messageCounter                  = 0;
+    bool endOfString                               = false;
     
-    //GO TO port to timer switch
-    softwareUART1_Timer_g = Timer(timer1, baudRate, fcy, 
-                                 SymbolIsComming, 
-                                 &softwareUART1_Running_g, 
-                                 &softwareUART1_CurrentSymbol_g);
-     
-    software_uart_t client = {__Software_UART1_Recieve, __Software_UART_Clear};
-    return client;
+    while((messageCounter < SOFTWARE_UART1_BUFF) && (!endOfString))
+    {
+        softwareUART1_RunningFlag_g = true;     
+        softwareUART1_Timer_g.Start(); 
+        while(softwareUART1_RunningFlag_g) {};  
+        softwareUART1_Timer_g.Stop();
+        
+        message[messageCounter++] = softwareUART1_CurrentSymbol_g; 
+        endOfString = softwareUART1_CurrentSymbol_g == lineFeedSymbol;
+        softwareUART1_CurrentSymbol_g = 0b00000000;     
+    }
+    
+    softwareUART1_CurrentString_g.length  = messageCounter;
+    softwareUART1_CurrentString_g.pointer = message;
+    
+    return softwareUART1_CurrentString_g;
 }
 
 
 
+void __Software_UART1_Clear(void)
+{
+  __Software_UART_Clear(&softwareUART1_CurrentString_g);
+}
 
 
 
+software_uart_t Software_UART(const uartPort_e           port,
+                              const unsigned long        baudRate,
+                              const unsigned long long   fcy)
+{
+    software_uart_t client;
+            
+    switch(port)
+    {
+        case uart1:
+            SOFTWARE_UART1_INIT;
+            softwareUART1_maxTicks_g = baudRate * (SOFTWARE_UART1_WAIT / 1000ULL);
+            softwareUART1_Timer_g = Timer(timer1, baudRate, fcy, 
+                                            SymbolIsComming, 
+                                            &softwareUART1_RunningFlag_g, 
+                                            &softwareUART1_CurrentSymbol_g);
+            client.Recieve = __Software_UART1_Recieve;
+            client.Clear   = __Software_UART1_Clear;
+        break;
+        
+        case uart2:
+            SOFTWARE_UART2_INIT;
+        break;
+        
+        default:
+            printf("No such UART port in software uart.");
+    }
 
+    return client;
+}
 
 
 

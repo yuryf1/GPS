@@ -9,13 +9,14 @@
 
 #include "software_uart.h"
 
-char response[BUFFERLENGTH];
-char response2[BUFFERLENGTH];
-char response3[BUFFERLENGTH];
-char response4[BUFFERLENGTH];
-char response5[BUFFERLENGTH];
+
+char response[SOFTWARE_UART1_BUFF];
+char response2[SOFTWARE_UART1_BUFF];
+char response3[SOFTWARE_UART1_BUFF];
+char response4[SOFTWARE_UART1_BUFF];
+char response5[SOFTWARE_UART1_BUFF];
 #define DELAY 
-//#define DELAY __delay_ms(1500)
+//#define DELAY __delay_ms(2222)
 int main(void) {
    
     EnablePLL(FINPUT,FOSC);
@@ -32,31 +33,31 @@ int main(void) {
     
     str_t gpsString = gps.Recieve();
     strncpy(response, gpsString.pointer, gpsString.length);
-    gps.Clear(&gpsString);
+    gps.Clear();
 
     DELAY; 
     
     str_t gpsString2 = gps.Recieve();
     strncpy(response2, gpsString2.pointer, gpsString2.length);
-    gps.Clear(&gpsString);
+    gps.Clear();
     
     DELAY; 
     
     str_t gpsString3 = gps.Recieve();
     strncpy(response3, gpsString3.pointer, gpsString3.length);
-    gps.Clear(&gpsString);
+    gps.Clear();
     
     DELAY; 
     
     str_t gpsString4 = gps.Recieve();
     strncpy(response4, gpsString4.pointer, gpsString4.length);
-    gps.Clear(&gpsString);
+    gps.Clear();
     
     DELAY; 
     
     str_t gpsString5 = gps.Recieve();
     strncpy(response5, gpsString5.pointer, gpsString5.length);
-    gps.Clear(&gpsString);
+    gps.Clear();
     
     Nop();
     Nop();
