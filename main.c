@@ -10,13 +10,12 @@
 #include "software_uart.h"
 
 
-char response[SOFTWARE_UART1_BUFF];
-char response2[SOFTWARE_UART1_BUFF];
-char response3[SOFTWARE_UART1_BUFF];
-char response4[SOFTWARE_UART1_BUFF];
-char response5[SOFTWARE_UART1_BUFF];
-#define DELAY 
-//#define DELAY __delay_ms(2222)
+// 1)
+// 10.2. +CGACT Command: PDP Context Activate or Deactivate
+
+
+char message[SOFTWARE_UART1_BUFF];
+
 int main(void) {
    
     EnablePLL(FINPUT,FOSC);
@@ -24,54 +23,34 @@ int main(void) {
     EnableModuleGPS();
     //EnableModuleGSM();
        
-    PIN_INIT_OUTPUT(3);
-    PIN_TURN_HIGH(3);
-    __delay_ms(9000);
-    PIN_TURN_LOW(3);
-        
+    __delay_ms(8000);
+    
     software_uart_t gps = Software_UART(uart1, GPS_BAUDRATE, FCY);
     
-    str_t gpsString = gps.Recieve();
-    strncpy(response, gpsString.pointer, gpsString.length);
-    gps.Clear();
-
-    DELAY; 
+    const char ggaProtocolHeader[] = "$GPRMC";
+    str_t location;
+    char * match = NULL;
     
-    str_t gpsString2 = gps.Recieve();
-    strncpy(response2, gpsString2.pointer, gpsString2.length);
-    gps.Clear();
     
-    DELAY; 
-    
-    str_t gpsString3 = gps.Recieve();
-    strncpy(response3, gpsString3.pointer, gpsString3.length);
-    gps.Clear();
-    
-    DELAY; 
-    
-    str_t gpsString4 = gps.Recieve();
-    strncpy(response4, gpsString4.pointer, gpsString4.length);
-    gps.Clear();
-    
-    DELAY; 
-    
-    str_t gpsString5 = gps.Recieve();
-    strncpy(response5, gpsString5.pointer, gpsString5.length);
-    gps.Clear();
-    
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-
-    while(true)
+    for(unsigned short i = 0; i < 10;)
     {
-        //Nop();
+        location = gps.Recieve();
+        match = strstr(location.pointer, ggaProtocolHeader);
+        
+        if(match)
+        {
+            strcpy(message, location.pointer);
+            i++;
+        }
+        
+        gps.Clear();
     }
     
-
-    
-       
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+     
     return 0;
 }
 
